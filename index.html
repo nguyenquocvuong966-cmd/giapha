@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Gia phả họ Nguyễn</title>
+<meta name="theme-color" content="#1F6B5C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Noto+Serif:wght@500;600&display=swap">
+<style>
+/* Bố cục: ứng dụng một cột cho điện thoại dọc; cây giãn toàn chiều ngang khi xoay ngang hoặc trên máy tính.
+   Màu: giấy ngả xanh rêu, mực xanh ngọc làm điểm nhấn, mỗi chi một màu riêng. */
+:root{
+  --bg:#F3F5F1; --surface:#FFFFFF; --surface2:#E9EDE7; --ink:#18211E; --muted:#56635D; --faint:#86918C;
+  --line:#D6DCD5; --line2:#B9C2BB; --accent:#1F6B5C; --accent-ink:#FFFFFF; --accent-soft:#DCEDE6; --accent-text:#17574A;
+  --warn-bg:#FBEFD3; --warn-fg:#6B4A05; --danger:#B3261E; --danger-bg:#FBE4E1; --ok-bg:#DFF1E4; --ok-fg:#1E5B32;
+  --scrim:rgba(16,22,20,.45); --shadow:0 10px 30px rgba(16,30,25,.18);
+  --k0:#2F7D6B; --k0b:#DCEFE8; --k0f:#17493E;
+  --k1:#B5532E; --k1b:#F7E1D6; --k1f:#6E2C14;
+  --k2:#5B54B0; --k2b:#E5E3F7; --k2f:#2F2A73;
+  --k3:#A07413; --k3b:#F5EACB; --k3f:#5E4306;
+  --k4:#2E6FA8; --k4b:#DCE9F5; --k4f:#153F63;
+  --k5:#A23E6B; --k5b:#F5DCE7; --k5f:#5E1F3C;
+  --f-ui:"Be Vietnam Pro", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-name:"Noto Serif", "Times New Roman", Georgia, serif;
+  --r:12px; --hdr:56px; --tab:62px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111715; --surface:#1A2320; --surface2:#222D29; --ink:#E6ECE8; --muted:#A3B0AA; --faint:#77847E;
+  --line:#2E3A36; --line2:#45534D; --accent:#5DBFA5; --accent-ink:#0D1F1A; --accent-soft:#1D3A33; --accent-text:#8FDCC6;
+  --warn-bg:#3A2E10; --warn-fg:#F2D48A; --danger:#F28B82; --danger-bg:#3D1C1A; --ok-bg:#163223; --ok-fg:#A7E3B8;
+  --scrim:rgba(0,0,0,.6); --shadow:0 10px 30px rgba(0,0,0,.5);
+  --k0:#5DCAA5; --k0b:#173A32; --k0f:#BDEBDA; --k1:#F0997B; --k1b:#4A2416; --k1f:#F5C4B3;
+  --k2:#A9A2EE; --k2b:#2B2858; --k2f:#D8D5FA; --k3:#E3B04B; --k3b:#3D2E0B; --k3f:#F5DFA6;
+  --k4:#85B7EB; --k4b:#132F4A; --k4f:#C9DEF5; --k5:#ED93B1; --k5b:#4A1A30; --k5f:#F4C0D1;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#111715; --surface:#1A2320; --surface2:#222D29; --ink:#E6ECE8; --muted:#A3B0AA; --faint:#77847E;
+  --line:#2E3A36; --line2:#45534D; --accent:#5DBFA5; --accent-ink:#0D1F1A; --accent-soft:#1D3A33; --accent-text:#8FDCC6;
+  --warn-bg:#3A2E10; --warn-fg:#F2D48A; --danger:#F28B82; --danger-bg:#3D1C1A; --ok-bg:#163223; --ok-fg:#A7E3B8;
+  --scrim:rgba(0,0,0,.6); --shadow:0 10px 30px rgba(0,0,0,.5);
+  --k0:#5DCAA5; --k0b:#173A32; --k0f:#BDEBDA; --k1:#F0997B; --k1b:#4A2416; --k1f:#F5C4B3;
+  --k2:#A9A2EE; --k2b:#2B2858; --k2f:#D8D5FA; --k3:#E3B04B; --k3b:#3D2E0B; --k3f:#F5DFA6;
+  --k4:#85B7EB; --k4b:#132F4A; --k4f:#C9DEF5; --k5:#ED93B1; --k5b:#4A1A30; --k5f:#F4C0D1;
+  color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:17px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.k0{--k:var(--k0);--kb:var(--k0b);--kf:var(--k0f)} .k1{--k:var(--k1);--kb:var(--k1b);--kf:var(--k1f)}
+.k2{--k:var(--k2);--kb:var(--k2b);--kf:var(--k2f)} .k3{--k:var(--k3);--kb:var(--k3b);--kf:var(--k3f)}
+.k4{--k:var(--k4);--kb:var(--k4b);--kf:var(--k4f)} .k5{--k:var(--k5);--kb:var(--k5b);--kf:var(--k5f)}
+.ico{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Đầu trang & thanh tab */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.hin{height:var(--hdr);display:flex;align-items:center;gap:6px;max-width:1200px;margin:0 auto}
+.ttl{font-family:var(--f-name);font-weight:600;font-size:19px;text-align:left;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.ib{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--ink)}
+.ib:hover{background:var(--surface2)}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabs .tin{display:flex;max-width:640px;margin:0 auto;height:var(--tab)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:13px;color:var(--muted);font-weight:500}
+.tab[aria-current="true"]{color:var(--accent-text)}
+.tab[aria-current="true"] .ico{stroke-width:2.3}
+main{padding-bottom:calc(var(--tab) + env(safe-area-inset-bottom,0px) + 20px)}
+.wrap{max-width:640px;margin:0 auto;padding-block:14px}
+.banner{font-size:14px;padding:8px 12px;border-radius:10px;margin:0 0 12px;background:var(--warn-bg);color:var(--warn-fg)}
+
+/* Ảnh tròn */
+.av{--s:48px;width:var(--s);height:var(--s);border-radius:50%;flex:none;display:grid;place-items:center;overflow:hidden;
+  border:calc(var(--s) * .06 + 1px) solid var(--k);background:var(--kb);color:var(--kf);font-weight:600;font-size:calc(var(--s) * .34)}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Dạng 1 — gia đình */
+.crumbs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;scrollbar-width:none}
+.crumbs::-webkit-scrollbar{display:none}
+.crumb{white-space:nowrap;font-size:14px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.crumb.on{background:var(--accent-soft);color:var(--accent-text);border-color:transparent;font-weight:500}
+.sec{font-size:13px;letter-spacing:.04em;color:var(--faint);margin:18px 2px 6px;font-weight:500;text-transform:uppercase}
+.list{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;min-height:68px}
+.row:hover{border-color:var(--line2)}
+.row .nm{font-family:var(--f-name);font-weight:500;font-size:17px;line-height:1.3}
+.row .sb{font-size:14px;color:var(--muted)}
+.row .tx{flex:1;min-width:0}
+.row .ico{color:var(--faint)}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--surface2);color:var(--muted);font-weight:500;vertical-align:1px}
+.hero{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 18px 16px;text-align:center;margin-top:4px}
+.hero .av{margin:0 auto 12px;cursor:zoom-in}
+.hero h1{font-family:var(--f-name);font-weight:600;font-size:26px;line-height:1.25;margin:0 0 4px;text-wrap:balance}
+.hero .meta{color:var(--muted);font-size:15px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;text-align:left;margin:16px 0 4px;padding-top:14px;border-top:1px solid var(--line);font-size:16px}
+.facts dt{color:var(--faint);font-size:14px;padding-top:2px}
+.facts dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:12px;border:1px solid var(--line2);background:var(--surface);font-weight:500;font-size:16px}
+.btn:hover{background:var(--surface2)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.pri:hover{filter:brightness(1.08)}
+.btn.dng{color:var(--danger);border-color:var(--danger)}
+.btn.sm{min-height:38px;padding:0 12px;font-size:14px;border-radius:10px}
+.add{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:1.5px dashed var(--accent);border-radius:var(--r);color:var(--accent-text);font-weight:500;background:transparent;min-height:56px}
+.add .pl{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center}
+.empty{color:var(--muted);text-align:center;padding:40px 10px}
+
+/* Dạng 4 — cây */
+.tctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-block:10px;max-width:1200px;margin:0 auto}
+.seg{display:inline-flex;background:var(--surface2);border-radius:12px;padding:3px}
+.seg button{padding:8px 12px;border-radius:9px;font-size:14px;font-weight:500;color:var(--muted);max-width:52vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.tctl .sp{flex:1}
+.zb{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
+.twrap{overflow:auto;border-top:1px solid var(--line);background:var(--bg);touch-action:pan-x pan-y;cursor:grab;overscroll-behavior:contain}
+.twrap.drag{cursor:grabbing}
+.tree{display:inline-block;min-width:100%;padding:24px 40px 60px;text-align:center}
+.tree ul{display:flex;justify-content:center;padding:18px 0 0;margin:0;position:relative}
+.tree>ul{padding-top:0}
+.tree li{list-style:none;position:relative;padding:18px 5px 0;display:flex;flex-direction:column;align-items:center}
+.tree li::before,.tree li::after{content:"";position:absolute;top:0;right:50%;width:50%;height:18px;border-top:1.5px solid var(--line2)}
+.tree li::after{right:auto;left:50%;border-left:1.5px solid var(--line2)}
+.tree li:only-child::before,.tree li:only-child::after{display:none}
+.tree li:only-child{padding-top:0}
+.tree li:first-child::before,.tree li:last-child::after{border:0}
+.tree li:last-child::before{border-right:1.5px solid var(--line2);border-radius:0 8px 0 0}
+.tree li:first-child::after{border-radius:8px 0 0 0}
+.tree ul ul::before{content:"";position:absolute;top:0;left:50%;height:18px;border-left:1.5px solid var(--line2)}
+.tree>ul>li{padding-top:0}
+.tree>ul>li::before,.tree>ul>li::after{display:none}
+.nd{display:flex;flex-direction:column;align-items:center;gap:4px;width:118px;padding:10px 6px 8px;border-radius:12px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--k)}
+.nd .nm{font-family:var(--f-name);font-weight:500;font-size:14px;line-height:1.25}
+.nd .yr{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.nd .sp{font-size:12px;color:var(--faint);line-height:1.25}
+.nd.on{background:var(--accent-soft);border-color:var(--accent);border-top-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.nd.on .nm{color:var(--accent-text)}
+.more{font-size:13px;padding:6px 12px;border-radius:999px;border:1px dashed var(--line2);color:var(--muted);background:var(--surface)}
+.thint{font-size:13px;color:var(--faint)}
+
+/* Dạng 5 — thanh thời gian */
+.axis{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--hdr));z-index:5;background:var(--bg);height:30px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.axis span{position:absolute;bottom:4px;transform:translateX(-50%);font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+.axis span:first-child{transform:none}
+.grid{position:relative}
+.gl{position:absolute;top:0;bottom:0;border-left:1px dashed var(--line);pointer-events:none}
+.tl{position:relative;display:block;width:100%;height:34px;margin:3px 0;border-radius:8px}
+.tl:hover{background:var(--surface2)}
+.tb{position:absolute;top:5px;bottom:5px;border-radius:6px;background:var(--kb);border-left:3px solid var(--k);min-width:6px}
+.tb.alive{border-right:2px dashed var(--k);border-radius:6px 0 0 6px}
+.tlab{position:absolute;top:0;bottom:0;display:flex;align-items:center;padding:0 7px;font-size:13px;color:var(--kf);white-space:nowrap;font-weight:500}
+.tl.on .tb{box-shadow:0 0 0 2px var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted);margin:4px 0 10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--kb);border-left:3px solid var(--k);vertical-align:-1px;margin-right:5px}
+
+/* Ngày giỗ, quản trị */
+.gio{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;width:100%;text-align:left}
+.gio .d{width:58px;flex:none;text-align:center;border-right:1px solid var(--line);padding-right:10px}
+.gio .d b{display:block;font-size:22px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.gio .d small{font-size:12px;color:var(--faint)}
+.soon{color:var(--accent-text);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.card b{display:block;font-size:26px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.card span{font-size:13px;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.barrow{display:grid;grid-template-columns:110px 1fr 36px;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.barrow .bt{height:10px;border-radius:5px;background:var(--surface2);overflow:hidden}
+.barrow .bt i{display:block;height:100%;background:var(--k)}
+.barrow b{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.sw{position:relative;width:52px;height:30px;border-radius:15px;background:var(--line2);flex:none;transition:background .15s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.sw[aria-checked="true"]{background:var(--accent)}
+.sw[aria-checked="true"]::after{left:25px}
+.entry{display:flex;align-items:center;gap:12px;padding:14px;border-radius:var(--r);background:var(--warn-bg);color:var(--warn-fg)}
+.entry.off{background:var(--surface2);color:var(--muted)}
+.urow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.urow:first-child{border-top:0}
+.urow .tx{flex:1;min-width:150px}
+.log{font-size:14px;padding:8px 0;border-top:1px solid var(--line)}
+.log:first-child{border-top:0}
+.log small{color:var(--faint);display:block;font-size:12px}
+
+/* Lớp phủ, biểu mẫu */
+.ov{position:fixed;inset:0;z-index:50;background:var(--scrim);display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--surface);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;box-shadow:var(--shadow);
+  padding:18px max(18px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+@media (min-width:700px){.ov{align-items:center}.sheet{border-radius:20px}}
+.sheet h2{font-family:var(--f-name);font-size:21px;font-weight:600;margin:0 0 2px}
+.sheet .sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.fld{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.fld>span{font-size:14px;color:var(--muted)}
+.inp{height:48px;border:1px solid var(--line2);border-radius:12px;padding:0 12px;background:var(--surface);font-size:17px;width:100%}
+textarea.inp{height:auto;min-height:72px;padding:10px 12px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--line2);font-weight:500;cursor:pointer}
+.chip input:checked+span{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-text)}
+.chip input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
+.ph{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.ph .pv{width:84px;height:84px;border-radius:50%;border:2px dashed var(--line2);display:grid;place-items:center;overflow:hidden;color:var(--faint);flex:none}
+.ph .pv img{width:100%;height:100%;object-fit:cover}
+.ph .bts{display:flex;flex-wrap:wrap;gap:8px}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.err{color:var(--danger);background:var(--danger-bg);border-radius:10px;padding:8px 12px;font-size:14px;margin:0 0 12px}
+.acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:6px}
+.more-f summary{cursor:pointer;color:var(--accent-text);font-weight:500;padding:6px 0 10px}
+.menu .mi{display:flex;align-items:center;gap:14px;width:100%;padding:14px 6px;border-bottom:1px solid var(--line);font-size:17px;text-align:left}
+.menu .mi:last-child{border-bottom:0}
+.who{font-size:14px;color:var(--muted);margin-bottom:6px}
+.srch{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.big{max-width:min(92vw,520px);border-radius:16px;display:block;margin:0 auto}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tab) + env(safe-area-inset-bottom,0px) + 14px);z-index:60;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;max-width:calc(100% - 32px);text-align:center}
+
+/* Đăng nhập */
+.login{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding-block:24px}
+.lbox{width:100%;max-width:400px}
+.seal{width:64px;height:64px;border-radius:16px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-name);font-size:30px;font-weight:600;margin-bottom:16px}
+.lbox h1{font-family:var(--f-name);font-weight:600;font-size:28px;margin:0 0 4px;text-wrap:balance}
+.lbox p{color:var(--muted);margin:0 0 20px}
+.demo{margin-top:22px;padding:14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);font-size:14px}
+.demo b{font-weight:600}
+.demo button{display:flex;justify-content:space-between;width:100%;padding:8px 0;border-top:1px solid var(--line);text-align:left}
+.demo button:first-of-type{border-top:0}
+
+@media (min-width:900px){
+  .wrap{padding-block:22px}
+}
+/* Điện thoại xoay ngang: thu gọn đầu trang và thanh tab để cây có chỗ */
+@media (orientation:landscape) and (max-height:520px){
+  :root{--hdr:44px;--tab:44px}
+  .ttl{font-size:16px}
+  .ib{width:40px;height:40px}
+  .tab{flex-direction:row;gap:6px;font-size:13px}
+  .tab .ico{width:20px!important;height:20px!important}
+  .tctl{padding-block:6px}
+  .seg button{padding:5px 10px}
+  .zb{width:34px;height:34px}
+  .tree{padding:12px 30px 40px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+<div id="ov"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+/* ================= CẤU HÌNH =================
+   API_URL để trống = chạy thử với dữ liệu mẫu trong máy.
+   Dán link Apps Script (/exec) vào đây để dùng dữ liệu thật. */
+const CONFIG = { API_URL: 'https://script.google.com/macros/s/AKfycbwKWNfHVk_fH6wH44f3O-ZhwfhQ17-jSDgwqGB54-So75Hv4UuFHjZuwotfa9M3DJb3uw/exec', TEN: 'Gia phả họ Nguyễn' };
+
+const DEMO = !CONFIG.API_URL;
+const NOW = new Date();
+const NOW_Y = NOW.getFullYear();
+const S = { token:null, me:null, people:{}, list:[], kids:{}, chis:[], entryMode:true, title:CONFIG.TEN,
+  focus:null, view:'family', autoTree:false, treeMode:'quanh', zoom:1, overlay:null, form:null,
+  offline:false, users:null, logs:null, photos:{}, asked:{}, resetFor:null };
+
+/* ---------- tiện ích ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+const num = (v, d = 0) => { const n = parseInt(v, 10); return isNaN(n) ? d : n; };
+const store = {
+  get(k){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch(e){ return null; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} },
+  del(k){ try { localStorage.removeItem(k); } catch(e){} }
+};
+const I = {
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+  fam:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2c3 .3 5.5 2.7 5.5 5.8"/>',
+  tree:'<rect x="9" y="3" width="6" height="5" rx="1.2"/><rect x="3" y="16" width="6" height="5" rx="1.2"/><rect x="15" y="16" width="6" height="5" rx="1.2"/><path d="M12 8v4M6 16v-4h12v4"/>',
+  time:'<path d="M4 6h10M7 12h12M4 18h8"/>',
+  chev:'<path d="m9 6 6 6-6 6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+  cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  img:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/>',
+  x:'<path d="M6 6l12 12M18 6 6 18"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  shield:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>',
+  key:'<circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l3 3"/>',
+  out:'<path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h10"/>',
+  zin:'<circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M20 20l-3.5-3.5"/>',
+  zout:'<circle cx="11" cy="11" r="7"/><path d="M8 11h6M20 20l-3.5-3.5"/>',
+  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/>'
+};
+const ic = (n, s = 22) => `<svg class="ico" viewBox="0 0 24 24" style="width:${s}px;height:${s}px" aria-hidden="true">${I[n]}</svg>`;
+
+let toastT;
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2600); }
+
+/* ---------- âm lịch (thuật toán Hồ Ngọc Đức, múi giờ +7) ---------- */
+const LUNAR = (() => {
+  const INT = Math.floor, PI = Math.PI, TZ = 7;
+  function jdFromDate(dd, mm, yy){ const a = INT((14 - mm) / 12), y = yy + 4800 - a, m = mm + 12 * a - 3;
+    let jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - INT(y / 100) + INT(y / 400) - 32045;
+    if (jd < 2299161) jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - 32083; return jd; }
+  function jdToDate(jd){ let a, b, c; if (jd > 2299160){ a = jd + 32044; b = INT((4 * a + 3) / 146097); c = a - INT((b * 146097) / 4); } else { b = 0; c = jd + 32082; }
+    const d = INT((4 * c + 3) / 1461), e = c - INT((1461 * d) / 4), m = INT((5 * e + 2) / 153);
+    return [e - INT((153 * m + 2) / 5) + 1, m + 3 - 12 * INT(m / 10), b * 100 + d - 4800 + INT(m / 10)]; }
+  function newMoon(k){ const T = k / 1236.85, T2 = T * T, T3 = T2 * T, dr = PI / 180;
+    let Jd1 = 2415020.75933 + 29.53058868 * k + 0.0001178 * T2 - 0.000000155 * T3;
+    Jd1 += 0.00033 * Math.sin((166.56 + 132.87 * T - 0.009173 * T2) * dr);
+    const M = 359.2242 + 29.10535608 * k - 0.0000333 * T2 - 0.00000347 * T3;
+    const Mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3;
+    const F = 21.2964 + 390.67050646 * k - 0.0016528 * T2 - 0.00000239 * T3;
+    let C1 = (0.1734 - 0.000393 * T) * Math.sin(M * dr) + 0.0021 * Math.sin(2 * dr * M);
+    C1 = C1 - 0.4068 * Math.sin(Mpr * dr) + 0.0161 * Math.sin(dr * 2 * Mpr);
+    C1 = C1 - 0.0004 * Math.sin(dr * 3 * Mpr);
+    C1 = C1 + 0.0104 * Math.sin(dr * 2 * F) - 0.0051 * Math.sin(dr * (M + Mpr));
+    C1 = C1 - 0.0074 * Math.sin(dr * (M - Mpr)) + 0.0004 * Math.sin(dr * (2 * F + M));
+    C1 = C1 - 0.0004 * Math.sin(dr * (2 * F - M)) - 0.0006 * Math.sin(dr * (2 * F + Mpr));
+    C1 = C1 + 0.0010 * Math.sin(dr * (2 * F - Mpr)) + 0.0005 * Math.sin(dr * (2 * Mpr + M));
+    const deltat = T < -11 ? 0.001 + 0.000839 * T + 0.0002261 * T2 - 0.00000845 * T3 - 0.000000081 * T * T3 : -0.000278 + 0.000265 * T + 0.000262 * T2;
+    return Jd1 + C1 - deltat; }
+  function sunLong(jdn){ const T = (jdn - 2451545.0) / 36525, T2 = T * T, dr = PI / 180;
+    const M = 357.52910 + 35999.05030 * T - 0.0001559 * T2 - 0.00000048 * T * T2;
+    const L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2;
+    let DL = (1.914600 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
+    DL += (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M) + 0.000290 * Math.sin(dr * 3 * M);
+    let L = (L0 + DL) * dr; L -= PI * 2 * INT(L / (PI * 2)); return L; }
+  const getSun = dn => INT(sunLong(dn - 0.5 - TZ / 24) / PI * 6);
+  const getNM = k => INT(newMoon(k) + 0.5 + TZ / 24);
+  function m11(yy){ const off = jdFromDate(31, 12, yy) - 2415021, k = INT(off / 29.530588853); let nm = getNM(k); if (getSun(nm) >= 9) nm = getNM(k - 1); return nm; }
+  function leapOff(a11){ const k = INT((a11 - 2415021.076998695) / 29.530588853 + 0.5); let last, i = 1, arc = getSun(getNM(k + i));
+    do { last = arc; i++; arc = getSun(getNM(k + i)); } while (arc != last && i < 14); return i - 1; }
+  function s2l(dd, mm, yy){ const dn = jdFromDate(dd, mm, yy), k = INT((dn - 2415021.076998695) / 29.530588853);
+    let ms = getNM(k + 1); if (ms > dn) ms = getNM(k);
+    let a11 = m11(yy), b11 = a11, ly; if (a11 >= ms){ ly = yy; a11 = m11(yy - 1); } else { ly = yy + 1; b11 = m11(yy + 1); }
+    const ld = dn - ms + 1, diff = INT((ms - a11) / 29); let leap = 0, lm = diff + 11;
+    if (b11 - a11 > 365){ const lo = leapOff(a11); if (diff >= lo){ lm = diff + 10; if (diff == lo) leap = 1; } }
+    if (lm > 12) lm -= 12; if (lm >= 11 && diff < 4) ly -= 1; return [ld, lm, ly, leap]; }
+  function l2s(ld, lm, ly, leap){ let a11, b11; if (lm < 11){ a11 = m11(ly - 1); b11 = m11(ly); } else { a11 = m11(ly); b11 = m11(ly + 1); }
+    const k = INT(0.5 + (a11 - 2415021.076998695) / 29.530588853); let off = lm - 11; if (off < 0) off += 12;
+    if (b11 - a11 > 365){ const lo = leapOff(a11); let lmo = lo - 2; if (lmo < 0) lmo += 12;
+      if (leap != 0 && lm != lmo) return null; else if (leap != 0 || off >= lo) off += 1; }
+    const ms = getNM(k + off); const nextMs = getNM(k + off + 1);
+    const day = Math.min(ms + ld - 1, nextMs - 1); return jdToDate(day); }
+  const CAN = ['Giáp','Ất','Bính','Đinh','Mậu','Kỷ','Canh','Tân','Nhâm','Quý'];
+  const CHI = ['Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi','Thân','Dậu','Tuất','Hợi'];
+  const canChi = y => CAN[(y + 6) % 10] + ' ' + CHI[(y + 8) % 12];
+  return { s2l, l2s, canChi, jdFromDate };
+})();
+
+/* ---------- chỉ mục dữ liệu ---------- */
+const P = id => S.people[id];
+function reindex(arr){
+  S.list = arr; S.people = {}; S.kids = {};
+  arr.forEach(p => S.people[p.id] = p);
+  arr.forEach(p => [p.chaId, p.meId].forEach(pid => { if (pid && S.people[pid]){ (S.kids[pid] = S.kids[pid] || []); if (!S.kids[pid].includes(p.id)) S.kids[pid].push(p.id); } }));
+  for (const k in S.kids) S.kids[k].sort(byBirth);
+  S.chis = [...new Set(arr.map(p => p.chi).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'vi', { numeric:true }));
+}
+function byBirth(a, b){ const A = P(a), B = P(b);
+  return (num(A.thuTu, 99) - num(B.thuTu, 99)) || (num(A.namSinh, 9999) - num(B.namSinh, 9999)) || A.hoTen.localeCompare(B.hoTen, 'vi'); }
+const kidsOf = id => (S.kids[id] || []).map(P);
+const spouses = p => String(p.voChong || '').split(',').filter(Boolean).map(P).filter(Boolean);
+const parents = p => [P(p.chaId), P(p.meId)].filter(Boolean);
+function siblings(p){ const ids = new Set(); [p.chaId, p.meId].forEach(pid => (S.kids[pid] || []).forEach(id => { if (id !== p.id) ids.add(id); }));
+  return [...ids].sort(byBirth).map(P); }
+function clanParent(p){ const c = P(p.chaId), m = P(p.meId);
+  if (c && !c.ngoaiToc) return c; if (m && !m.ngoaiToc) return m; return c || m || null; }
+function lineOf(p){ const out = []; let cur = p, guard = 0;
+  if (cur.ngoaiToc && !clanParent(cur)){ const sp = spouses(cur).find(s => !s.ngoaiToc); if (sp) cur = sp; }
+  while (cur && guard++ < 40){ out.unshift(cur); cur = clanParent(cur); } return out; }
+const chiIdx = chi => Math.max(0, S.chis.indexOf(chi)) % 6;
+const chiName = chi => chi || 'Dòng chính';
+function initials(n){ const w = String(n || '').trim().split(/\s+/).filter(Boolean); if (!w.length) return '?';
+  return (w.length > 1 ? w[w.length - 2][0] + w[w.length - 1][0] : w[0][0]).toUpperCase(); }
+function years(p){ const a = p.namSinh || '?'; return p.conSong ? (p.namSinh ? 'Sinh ' + a : '') : a + ' – ' + (p.namMat || '?'); }
+function age(p){ const s = num(p.namSinh, 0); if (!s) return ''; const e = p.conSong ? NOW_Y : num(p.namMat, 0); return e ? (e - s) + ' tuổi' : ''; }
+function av(p, size){ const src = p.anhId && S.photos[p.anhId];
+  return `<span class="av k${chiIdx(p.chi)}" style="--s:${size}px">${src ? `<img src="${src}" alt="">` : `<span>${esc(initials(p.hoTen))}</span>`}</span>`; }
+const isAdmin = () => S.me && S.me.vaiTro === 'admin';
+function canEditChi(chi){ if (!S.me) return false; if (isAdmin()) return true;
+  return S.me.vaiTro === 'bientap' && S.entryMode && String(chi || '') === String(S.me.chi || ''); }
+const canEdit = p => p && canEditChi(p.chi);
+
+/* ---------- ảnh: tải dần, lưu trong máy ---------- */
+const IDB = {
+  db:null,
+  open(){ return new Promise(r => { try { const q = indexedDB.open('giapha', 1); q.onupgradeneeded = () => q.result.createObjectStore('anh');
+    q.onsuccess = () => { this.db = q.result; r(); }; q.onerror = () => r(); } catch(e){ r(); } }); },
+  get(k){ return new Promise(r => { try { const q = this.db.transaction('anh').objectStore('anh').get(k); q.onsuccess = () => r(q.result); q.onerror = () => r(null); } catch(e){ r(null); } }); },
+  set(k, v){ try { this.db.transaction('anh', 'readwrite').objectStore('anh').put(v, k); } catch(e){} }
+};
+async function loadPhotos(){
+  const need = [...new Set(S.list.map(p => p.anhId).filter(id => id && !S.photos[id] && !S.asked[id]))];
+  if (!need.length) return;
+  need.forEach(id => S.asked[id] = 1);
+  let got = false;
+  if (IDB.db) for (const id of need){ const v = await IDB.get(id); if (v){ S.photos[id] = v; got = true; } }
+  const rest = need.filter(id => !S.photos[id]);
+  for (let i = 0; i < rest.length; i += 20){
+    try { const r = await api('photo', { ids: rest.slice(i, i + 20) });
+      Object.entries(r.photos || {}).forEach(([k, v]) => { if (v){ S.photos[k] = v; IDB.set(k, v); got = true; } }); } catch(e){ break; }
+  }
+  if (got && !S.overlay) render(true);
+}
+function readPhoto(file){ return new Promise((res, rej) => { const img = new Image(), url = URL.createObjectURL(file);
+  img.onload = () => { const s = Math.min(img.width, img.height), c = document.createElement('canvas'); c.width = c.height = 400;
+    const sx = (img.width - s) / 2, sy = img.height > img.width ? (img.height - s) * 0.3 : (img.height - s) / 2;
+    c.getContext('2d').drawImage(img, sx, sy, s, s, 0, 0, 400, 400); URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', 0.82)); };
+  img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('Không đọc được ảnh này')); }; img.src = url; }); }
+
+/* ---------- gọi máy chủ ---------- */
+async function api(action, payload = {}){
+  if (DEMO) return demoApi(action, payload);
+  let r;
+  try { r = await fetch(CONFIG.API_URL, { method:'POST', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action, token: S.token }, payload)) }); }
+  catch(e){ const er = new Error('Không có kết nối mạng'); er.net = true; throw er; }
+  const j = await r.json();
+  if (!j.ok){ if (j.err === 'HET_PHIEN'){ logout(true); throw new Error('Phiên đăng nhập đã hết. Hãy đăng nhập lại.'); } throw new Error(j.err || 'Có lỗi xảy ra'); }
+  return j;
+}
+
+/* ---------- dữ liệu chạy thử ---------- */
+const DEMO_KEY = 'gp_demo_v1';
+function demoSeed(){
+  const L = [];
+  const mk = (id, hoTen, gt, doi, chi, ns, nm, o = {}) => L.push(Object.assign({ id, hoTen, gioiTinh:gt, chaId:'', meId:'', voChong:'', doi:String(doi), chi,
+    ngoaiToc:false, namSinh:ns ? String(ns) : '', ngaySinh:'', conSong:!nm, namMat:nm ? String(nm) : '', ngayGio:'', anTang:'', dienThoai:'', diaChi:'', ghiChu:'', thuTu:'', anhId:'' }, o));
+  mk('p1','Nguyễn Văn Phúc','nam',1,'',1880,1958,{ voChong:'p1w', ngayGio:'15/10', anTang:'Nghĩa trang họ Nguyễn, quê nhà', ghiChu:'Thủy tổ, lập làng và nhà thờ họ.' });
+  mk('p1w','Lê Thị Gấm','nu',1,'',1884,1960,{ voChong:'p1', ngoaiToc:true, ngayGio:'8/1' });
+  mk('p2','Nguyễn Văn Thọ','nam',2,'Chi 1',1902,1974,{ chaId:'p1', meId:'p1w', voChong:'p2w', ngayGio:'2/10', thuTu:'1' });
+  mk('p2w','Trần Thị Nhàn','nu',2,'Chi 1',1905,1980,{ voChong:'p2', ngoaiToc:true, ngayGio:'20/6' });
+  mk('p3','Nguyễn Văn Phát','nam',2,'Chi 2',1906,1972,{ chaId:'p1', meId:'p1w', voChong:'p3w', ngayGio:'25/11', thuTu:'2' });
+  mk('p3w','Võ Thị Sen','nu',2,'Chi 2',1910,1985,{ voChong:'p3', ngoaiToc:true, ngayGio:'14/7' });
+  mk('p4','Nguyễn Thị Hiền','nu',2,'',1910,1990,{ chaId:'p1', meId:'p1w', ngayGio:'3/2', thuTu:'3' });
+  mk('p5','Nguyễn Văn Lộc','nam',3,'Chi 1',1925,1998,{ chaId:'p2', meId:'p2w', voChong:'p5w', ngayGio:'12/3', anTang:'Nghĩa trang họ, Quảng Ngãi', thuTu:'1' });
+  mk('p5w','Phạm Thị Mai','nu',3,'Chi 1',1928,2010,{ voChong:'p5', ngoaiToc:true, ngayGio:'20/10' });
+  mk('p6','Nguyễn Thị Lan','nu',3,'Chi 1',1929,2015,{ chaId:'p2', meId:'p2w', ngayGio:'9/9', thuTu:'2' });
+  mk('p7','Nguyễn Văn Bảo','nam',3,'Chi 1',1932,2001,{ chaId:'p2', meId:'p2w', ngayGio:'5/12', thuTu:'3' });
+  mk('p8','Nguyễn Văn Hải','nam',3,'Chi 2',1930,2005,{ chaId:'p3', meId:'p3w', voChong:'p8w', ngayGio:'18/4', thuTu:'1' });
+  mk('p8w','Đỗ Thị Thu','nu',3,'Chi 2',1934,2019,{ voChong:'p8', ngoaiToc:true, ngayGio:'1/11' });
+  mk('p9','Nguyễn Văn Khoa','nam',3,'Chi 2',1935,0,{ chaId:'p3', meId:'p3w', thuTu:'2', diaChi:'Quảng Ngãi' });
+  mk('p10','Nguyễn Văn Tâm','nam',4,'Chi 1',1952,0,{ chaId:'p5', meId:'p5w', voChong:'p10w', thuTu:'1', dienThoai:'0900 000 101', diaChi:'Quận 3, TP. Hồ Chí Minh', ghiChu:'Trưởng chi 1, giữ nhà thờ họ.' });
+  mk('p10w','Trần Thị Hoa','nu',4,'Chi 1',1955,0,{ voChong:'p10', ngoaiToc:true });
+  mk('p11','Nguyễn Văn Đức','nam',4,'Chi 1',1956,0,{ chaId:'p5', meId:'p5w', thuTu:'2' });
+  mk('p12','Nguyễn Thị Hạnh','nu',4,'Chi 1',1960,0,{ chaId:'p5', meId:'p5w', thuTu:'3' });
+  mk('p13','Nguyễn Văn Quang','nam',4,'Chi 1',1963,2020,{ chaId:'p5', meId:'p5w', thuTu:'4', ngayGio:'27/10' });
+  mk('p14','Nguyễn Văn Hùng','nam',4,'Chi 2',1958,0,{ chaId:'p8', meId:'p8w', voChong:'p14w', thuTu:'1' });
+  mk('p14w','Lý Thị Ngọc','nu',4,'Chi 2',1961,0,{ voChong:'p14', ngoaiToc:true });
+  mk('p15','Nguyễn Thị Thảo','nu',4,'Chi 2',1962,0,{ chaId:'p8', meId:'p8w', thuTu:'2' });
+  mk('p16','Nguyễn Văn An','nam',5,'Chi 1',1978,0,{ chaId:'p10', meId:'p10w', voChong:'p16w', thuTu:'1' });
+  mk('p16w','Hồ Thị Yến','nu',5,'Chi 1',1980,0,{ voChong:'p16', ngoaiToc:true });
+  mk('p17','Nguyễn Thị Bình','nu',5,'Chi 1',1981,0,{ chaId:'p10', meId:'p10w', thuTu:'2' });
+  mk('p18','Nguyễn Văn Minh','nam',5,'Chi 2',1985,0,{ chaId:'p14', meId:'p14w', thuTu:'1' });
+  mk('p19','Nguyễn Thị Vy','nu',5,'Chi 2',1990,0,{ chaId:'p14', meId:'p14w', thuTu:'2' });
+  mk('p20','Nguyễn Gia Bảo','nam',6,'Chi 1',2008,0,{ chaId:'p16', meId:'p16w', thuTu:'1' });
+  mk('p21','Nguyễn Ngọc Hân','nu',6,'Chi 1',2012,0,{ chaId:'p16', meId:'p16w', thuTu:'2' });
+  return { people:L, entryMode:true, logs:[], photos:{}, users:[
+    { tenDangNhap:'admin', hoTen:'Quản trị', vaiTro:'admin', chi:'', pw:'123456', khoa:false, sai:0 },
+    { tenDangNhap:'hung', hoTen:'Hùng', vaiTro:'bientap', chi:'Chi 2', pw:'123456', khoa:false, sai:0 },
+    { tenDangNhap:'lan', hoTen:'Lan', vaiTro:'bientap', chi:'Chi 1', pw:'123456', khoa:false, sai:0 },
+    { tenDangNhap:'minh', hoTen:'Minh', vaiTro:'xem', chi:'Chi 2', pw:'123456', khoa:false, sai:0 },
+    { tenDangNhap:'khach', hoTen:'Khách', vaiTro:'xem', chi:'', pw:'123456', khoa:false, sai:0 }
+  ]};
+}
+let DB = null;
+function demoDb(){ if (!DB) DB = store.get(DEMO_KEY) || demoSeed(); return DB; }
+function demoSave(){ store.set(DEMO_KEY, DB); }
+function demoLog(u, hd, id, ten, ct){ DB.logs.unshift({ t:new Date().toISOString(), ai:u, hd, id:id || '', ten:ten || '', ct:ct || '' }); DB.logs = DB.logs.slice(0, 200); }
+async function demoApi(a, y){
+  await new Promise(r => setTimeout(r, 120));
+  const db = demoDb();
+  if (a === 'login'){ const u = db.users.find(x => x.tenDangNhap === String(y.u || '').trim().toLowerCase());
+    if (!u || u.pw !== y.p){ if (u){ u.sai = (u.sai || 0) + 1; demoSave(); if (u.sai >= 5){ u.sai = 0; demoSave(); throw new Error('Nhập sai quá nhiều lần. Tài khoản tạm khóa 15 phút.'); } } throw new Error('Sai tên đăng nhập hoặc mật khẩu'); }
+    if (u.khoa) throw new Error('Tài khoản đã bị khóa. Liên hệ người quản trị.');
+    u.sai = 0; demoSave(); return { token:'demo.' + u.tenDangNhap, me:{ u:u.tenDangNhap, hoTen:u.hoTen, vaiTro:u.vaiTro, chi:u.chi } }; }
+  const nd = db.users.find(x => 'demo.' + x.tenDangNhap === S.token);
+  if (!nd || nd.khoa){ logout(true); throw new Error('Phiên đăng nhập đã hết. Hãy đăng nhập lại.'); }
+  const can = chi => nd.vaiTro === 'admin' || (nd.vaiTro === 'bientap' && db.entryMode && String(chi || '') === String(nd.chi || ''));
+  const seePriv = chi => nd.vaiTro === 'admin' || (nd.vaiTro === 'bientap' && String(chi || '') === String(nd.chi || ''));
+  const clone = p => { const o = JSON.parse(JSON.stringify(p)); if (o.conSong && !seePriv(o.chi)){ o.dienThoai = ''; o.diaChi = ''; o.ngaySinh = ''; } return o; };
+  switch (a){
+    case 'data': return { people: db.people.map(clone), me:{ u:nd.tenDangNhap, hoTen:nd.hoTen, vaiTro:nd.vaiTro, chi:nd.chi }, entryMode: db.entryMode, title: CONFIG.TEN };
+    case 'save': { const p = y.person; const cu = p.id ? db.people.find(x => x.id === p.id) : null;
+      if (!String(p.hoTen || '').trim()) throw new Error('Chưa nhập họ tên');
+      if (cu && !can(cu.chi)) throw new Error('Bạn không có quyền sửa người này');
+      const chi = nd.vaiTro === 'admin' ? (p.chi || '') : (cu ? cu.chi : nd.chi);
+      if (!can(chi)) throw new Error('Bạn chỉ được nhập người thuộc ' + (nd.chi || 'chi của mình'));
+      const moi = cu || { id:'P' + Date.now().toString(36), anhId:'' };
+      Object.assign(moi, p, { id:moi.id, chi, anhId:moi.anhId, hoTen:String(p.hoTen).trim() });
+      if (!cu) db.people.push(moi);
+      String(moi.voChong || '').split(',').filter(Boolean).forEach(sid => { const s = db.people.find(x => x.id === sid);
+        if (s){ const l = String(s.voChong || '').split(',').filter(Boolean); if (!l.includes(moi.id)){ l.push(moi.id); s.voChong = l.join(','); } } });
+      demoLog(nd.tenDangNhap, cu ? 'sua' : 'them', moi.id, moi.hoTen, ''); demoSave(); return { person: clone(moi) }; }
+    case 'delete': { if (nd.vaiTro !== 'admin') throw new Error('Chỉ người quản trị được xóa');
+      if (db.people.some(x => x.chaId === y.id || x.meId === y.id)) throw new Error('Người này còn con trong gia phả. Hãy xóa hoặc chuyển các con trước.');
+      const p = db.people.find(x => x.id === y.id);
+      db.people.forEach(x => { const l = String(x.voChong || '').split(',').filter(Boolean); if (l.includes(y.id)) x.voChong = l.filter(i => i !== y.id).join(','); });
+      db.people = db.people.filter(x => x.id !== y.id); demoLog(nd.tenDangNhap, 'xoa', y.id, p && p.hoTen, ''); demoSave(); return { deleted: y.id }; }
+    case 'uploadPhoto': { const p = db.people.find(x => x.id === y.id); if (!p) throw new Error('Không tìm thấy người');
+      if (!can(p.chi)) throw new Error('Bạn không có quyền sửa ảnh người này');
+      if (p.anhId) delete db.photos[p.anhId]; p.anhId = 'demo-' + Date.now().toString(36); db.photos[p.anhId] = y.data;
+      demoLog(nd.tenDangNhap, 'anh', p.id, p.hoTen, 'Cập nhật ảnh'); demoSave(); return { anhId: p.anhId }; }
+    case 'photo': { const o = {}; (y.ids || []).forEach(i => o[i] = db.photos[i] || ''); return { photos:o }; }
+    case 'changePassword': if (nd.pw !== y.old) throw new Error('Mật khẩu cũ không đúng'); if (String(y.new).length < 6) throw new Error('Mật khẩu mới tối thiểu 6 ký tự');
+      nd.pw = y.new; demoSave(); return { token:S.token };
+  }
+  if (nd.vaiTro !== 'admin') throw new Error('Chỉ người quản trị được làm thao tác này');
+  const pub = () => db.users.map(u => ({ tenDangNhap:u.tenDangNhap, hoTen:u.hoTen, vaiTro:u.vaiTro, chi:u.chi, khoa:!!u.khoa, khoaTam:false }));
+  switch (a){
+    case 'users': return { users: pub() };
+    case 'setEntryMode': db.entryMode = !!y.on; demoLog(nd.tenDangNhap, y.on ? 'mo_nhap_lieu' : 'dong_nhap_lieu'); demoSave(); return { entryMode: db.entryMode };
+    case 'logs': return { logs: db.logs };
+    case 'saveUser': { const t = y.user, ten = String(t.tenDangNhap || '').trim().toLowerCase();
+      if (!/^[a-z0-9._-]{3,30}$/.test(ten)) throw new Error('Tên đăng nhập 3–30 ký tự, chỉ chữ không dấu, số, dấu chấm, gạch');
+      let u = db.users.find(x => x.tenDangNhap === ten);
+      if (!u){ if (!t.matKhau || String(t.matKhau).length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự');
+        db.users.push({ tenDangNhap:ten, hoTen:t.hoTen || '', vaiTro:t.vaiTro || 'xem', chi:t.chi || '', pw:t.matKhau, khoa:false, sai:0 }); demoLog(nd.tenDangNhap, 'tao_tai_khoan', '', ten, t.vaiTro); }
+      else { if (u === nd && (t.vaiTro !== 'admin' || t.khoa)) throw new Error('Không thể tự hạ quyền hoặc tự khóa tài khoản quản trị của chính mình');
+        if (t.matKhau){ if (String(t.matKhau).length < 6) throw new Error('Mật khẩu tối thiểu 6 ký tự'); u.pw = t.matKhau; }
+        if (t.vaiTro) u.vaiTro = t.vaiTro; if (t.khoa != null) u.khoa = !!t.khoa; if (t.hoTen != null) u.hoTen = t.hoTen; if (t.chi != null) u.chi = t.chi;
+        demoLog(nd.tenDangNhap, 'sua_tai_khoan', '', ten, u.vaiTro + (t.matKhau ? ', đặt lại mật khẩu' : '') + (t.khoa === true ? ', khóa' : t.khoa === false ? ', mở khóa' : '')); }
+      demoSave(); return { users: pub() }; }
+  }
+  throw new Error('Không rõ thao tác');
+}
+
+/* ---------- phiên, tải dữ liệu ---------- */
+function logout(silent){ S.token = null; S.me = null; S.users = null; S.logs = null; store.del('gp_token'); store.del('gp_data');
+  S.overlay = null; S.form = null; renderOverlay(); render(); if (!silent) toast('Đã đăng xuất'); }
+function applyData(d){
+  S.me = d.me; S.entryMode = d.entryMode; S.title = d.title || CONFIG.TEN; reindex(d.people || []);
+  if (!S.focus || !P(S.focus)){ const saved = store.get('gp_focus'); S.focus = saved && P(saved) ? saved : defaultFocus(); }
+}
+function defaultFocus(){ if (DEMO && P('p5')) return 'p5'; const r = S.list.find(p => !p.ngoaiToc && !clanParent(p)); return r ? r.id : (S.list[0] && S.list[0].id); }
+async function loadData(){
+  try { const d = await api('data'); S.offline = false; applyData(d);
+    if (!DEMO) store.set('gp_data', Object.assign({}, d, { people: d.people.map(p => Object.assign({}, p, { dienThoai:'', diaChi:'' })) }));
+  } catch(e){ if (e.net && S.list.length){ S.offline = true; } else if (S.token) toast(e.message); }
+  render(); loadPhotos();
+}
+
+/* ---------- xoay màn hình ---------- */
+const isPhone = () => Math.min(screen.width, screen.height) < 600;
+function isLand(){ try { if (screen.orientation && screen.orientation.type) return screen.orientation.type.indexOf('landscape') === 0; } catch(e){}
+  if (typeof window.orientation === 'number') return Math.abs(window.orientation) === 90; return innerWidth > innerHeight; }
+function onRotate(){
+  if (!S.me || !isPhone() || S.overlay) return;
+  if (isLand() && S.view === 'family'){ S.view = 'tree'; S.autoTree = true; render(); }
+  else if (!isLand() && S.view === 'tree' && S.autoTree){ S.view = 'family'; S.autoTree = false; render(); }
+  else if (S.view === 'tree' || S.view === 'time') render();
+}
+try { screen.orientation && screen.orientation.addEventListener('change', () => setTimeout(onRotate, 60)); } catch(e){}
+addEventListener('orientationchange', () => setTimeout(onRotate, 120));
+let rsT; addEventListener('resize', () => { clearTimeout(rsT); rsT = setTimeout(() => { if (S.view === 'tree') sizeTree(); }, 120); });
+
+/* ---------- vẽ màn hình ---------- */
+function render(keepScroll){
+  const app = $('#app');
+  if (!S.me){ app.innerHTML = loginHTML(); return; }
+  const y = scrollY;
+  app.innerHTML = headerHTML() + `<main id="main">${viewHTML()}</main>` + tabsHTML();
+  if (keepScroll) scrollTo(0, y);
+  if (S.view === 'tree') afterTree();
+  if (S.view === 'time') afterTime(keepScroll);
+  if (S.view === 'admin' && S.users === null) loadAdmin();
+}
+function go(view, focus){ if (focus) { S.focus = focus; store.set('gp_focus', focus); }
+  if (view) { S.view = view; S.autoTree = false; } render(); if (view && view !== 'time') scrollTo(0, 0); }
+
+function headerHTML(){
+  return `<header class="hdr"><div class="hin gut"><button class="ttl" data-act="home">${esc(S.title)}</button>
+  <button class="ib" data-act="search" aria-label="Tìm người">${ic('search')}</button>
+  <button class="ib" data-act="menu" aria-label="Mở menu">${ic('menu')}</button></div></header>`;
+}
+function tabsHTML(){
+  const t = (v, n, label) => `<button class="tab" data-act="tab" data-v="${v}" aria-current="${S.view === v}">${ic(n, 24)}${label}</button>`;
+  return `<nav class="tabs" aria-label="Chế độ xem"><div class="tin">${t('family','fam','Gia đình')}${t('tree','tree','Cây')}${t('time','time','Thời gian')}</div></nav>`;
+}
+function viewHTML(){
+  if (!S.list.length) return `<div class="wrap gut"><div class="empty">${isAdmin() ? `Gia phả chưa có ai. <br><br><button class="btn pri" data-act="addroot">${ic('plus')}Nhập người đầu tiên (thủy tổ)</button>` : 'Gia phả chưa có dữ liệu.'}</div></div>`;
+  switch (S.view){ case 'tree': return treeHTML(); case 'time': return timeHTML(); case 'gio': return gioHTML(); case 'admin': return adminHTML(); default: return familyHTML(); }
+}
+function banners(){
+  let b = '';
+  if (DEMO) b += `<div class="banner">Bản chạy thử với dữ liệu mẫu. Mọi thay đổi chỉ lưu trong máy này.</div>`;
+  if (S.offline) b += `<div class="banner">Không có mạng. Đang xem bản đã lưu trong máy.</div>`;
+  if (S.me.vaiTro === 'bientap') b += S.entryMode ? `<div class="banner" style="background:var(--ok-bg);color:var(--ok-fg)">Bạn đang nhập liệu cho ${esc(chiName(S.me.chi))}.</div>` : `<div class="banner">Giai đoạn nhập liệu đã đóng. Bạn chỉ xem được.</div>`;
+  return b;
+}
+function rowHTML(p, sub){
+  return `<button class="row" data-act="focus" data-id="${p.id}">${av(p, 48)}<span class="tx"><span class="nm">${esc(p.hoTen)}</span><br><span class="sb">${sub}</span></span>${ic('chev')}</button>`;
+}
+function subLine(p, rel){ const bits = []; if (rel) bits.push(rel); const y = years(p); if (y) bits.push(y); if (!p.conSong) bits.push('<span class="tag">Đã mất</span>'); return bits.join(' · '); }
+
+/* Dạng 1 */
+function familyHTML(){
+  const p = P(S.focus); if (!p) return `<div class="wrap gut"><div class="empty">Không tìm thấy người này.</div></div>`;
+  const line = lineOf(p);
+  const crumbs = `<div class="crumbs">${line.map(a => `<button class="crumb${a.id === p.id ? ' on' : ''}" data-act="focus" data-id="${a.id}">${esc(shortName(a))}</button>`).join('')}${line[line.length - 1].id !== p.id ? `<button class="crumb on">${esc(shortName(p))}</button>` : ''}</div>`;
+  const facts = [];
+  if (p.ngaySinh || p.namSinh) facts.push(['Sinh', esc(p.ngaySinh || p.namSinh)]);
+  if (!p.conSong) facts.push(['Mất', esc(p.namMat || 'Chưa rõ năm')]);
+  if (p.ngayGio) facts.push(['Giỗ', esc(p.ngayGio) + ' âm lịch']);
+  if (p.anTang) facts.push(['An táng', esc(p.anTang)]);
+  if (p.dienThoai) facts.push(['Điện thoại', `<span style="user-select:all">${esc(p.dienThoai)}</span>`]);
+  if (p.diaChi) facts.push(['Địa chỉ', esc(p.diaChi)]);
+  if (p.ghiChu) facts.push(['Ghi chú', esc(p.ghiChu)]);
+  const meta = [`Đời ${esc(p.doi || '?')}`, esc(chiName(p.chi))]; if (p.ngoaiToc) meta.push(p.gioiTinh === 'nu' ? 'Dâu' : 'Rể');
+  const a = age(p); if (a) meta.push(a);
+  const pars = parents(p), sps = spouses(p), kids = kidsOf(p.id), sibs = siblings(p);
+  const addOk = canEditChi(p.chi);
+  let h = `<div class="wrap gut">${banners()}${crumbs}`;
+  if (pars.length) h += `<div class="sec">Cha mẹ</div><div class="list">${pars.map(x => rowHTML(x, subLine(x, x.gioiTinh === 'nu' ? 'Mẹ' : 'Cha'))).join('')}</div>`;
+  h += `<section class="hero" style="margin-top:${pars.length ? 14 : 4}px"><button data-act="zoomphoto" aria-label="Xem ảnh lớn" style="display:block;margin:0 auto">${av(p, 116)}</button>
+    <h1>${esc(p.hoTen)}</h1><div class="meta">${meta.join(' · ')}${!p.conSong ? ' <span class="tag">Đã mất</span>' : ''}</div>
+    ${facts.length ? `<dl class="facts">${facts.map(f => `<dt>${f[0]}</dt><dd>${f[1]}</dd>`).join('')}</dl>` : ''}
+    ${canEdit(p) ? `<div style="margin-top:12px"><button class="btn sm" data-act="edit" data-id="${p.id}">${ic('edit', 18)}Sửa thông tin</button></div>` : ''}</section>`;
+  if (sps.length) h += `<div class="sec">${p.gioiTinh === 'nu' ? 'Chồng' : 'Vợ'}</div><div class="list">${sps.map(x => rowHTML(x, subLine(x))).join('')}</div>`;
+  if (kids.length) h += `<div class="sec">Các con (${kids.length})</div><div class="list">${kids.map(x => rowHTML(x, subLine(x, kidsOf(x.id).length ? kidsOf(x.id).length + ' con' : ''))).join('')}</div>`;
+  if (sibs.length) h += `<div class="sec">Anh chị em (${sibs.length})</div><div class="list">${sibs.map(x => rowHTML(x, subLine(x))).join('')}</div>`;
+  if (addOk){
+    const ad = (rel, label) => `<button class="add" data-act="add" data-rel="${rel}" data-id="${p.id}"><span class="pl">${ic('plus', 20)}</span>${label}</button>`;
+    h += `<div class="sec">Thêm người</div><div class="list">${ad('con', 'Thêm con')}${ad('vo', p.gioiTinh === 'nu' ? 'Thêm chồng' : 'Thêm vợ')}${pars.length ? ad('anhem', 'Thêm anh chị em') : ''}${!pars.length && isAdmin() && !p.ngoaiToc ? ad('cha', 'Thêm cha (đời trên)') : ''}</div>`;
+  }
+  return h + `</div>`;
+}
+function shortName(p){ const w = p.hoTen.trim().split(/\s+/); const t = w[w.length - 1] || p.hoTen;
+  if (p.doi === '1' && !p.ngoaiToc) return 'Cụ ' + t; return t; }
+
+/* Dạng 4 */
+function treeRoots(){
+  if (S.treeMode === 'toan') return S.list.filter(p => !p.ngoaiToc && !clanParent(p)).sort((a, b) => num(a.doi, 99) - num(b.doi, 99) || byBirth(a.id, b.id));
+  let p = P(S.focus); if (!p) return [];
+  if (p.ngoaiToc && !clanParent(p)){ const sp = spouses(p).find(s => !s.ngoaiToc); if (sp) p = sp; }
+  let r = p; for (let i = 0; i < 2; i++){ const c = clanParent(r); if (c) r = c; }
+  return [r];
+}
+function countDesc(id, seen = new Set()){ let n = 0; kidsOf(id).forEach(k => { if (!seen.has(k.id)){ seen.add(k.id); n += 1 + countDesc(k.id, seen); } }); return n; }
+function treeHTML(){
+  const roots = treeRoots(), seen = new Set(), maxD = S.treeMode === 'toan' ? 99 : 4;
+  const sp = p => { const s = spouses(p); return s.length ? `<span class="sp">& ${s.map(x => esc(shortName(x))).join(', ')}</span>` : ''; };
+  function li(p, d){
+    if (seen.has(p.id)) return ''; seen.add(p.id);
+    const kids = kidsOf(p.id).filter(k => !seen.has(k.id));
+    let ch = '';
+    if (kids.length){ ch = d >= maxD ? `<ul><li><button class="more" data-act="tfocus" data-id="${kids[0].id}">+ ${countDesc(p.id)} người</button></li></ul>` : `<ul>${kids.map(k => li(k, d + 1)).join('')}</ul>`; }
+    return `<li><button class="nd k${chiIdx(p.chi)}${p.id === S.focus ? ' on' : ''}" data-act="tfocus" data-id="${p.id}">${av(p, 40)}<span class="nm">${esc(p.hoTen)}</span><span class="yr">${esc(years(p).replace('Sinh ', ''))}</span>${sp(p)}</button>${ch}</li>`;
+  }
+  const f = P(S.focus);
+  return `<div class="tctl gut"><div class="seg" role="group" aria-label="Phạm vi cây">
+    <button data-act="tmode" data-m="quanh" aria-pressed="${S.treeMode === 'quanh'}">Quanh ${esc(f ? shortName(f) : '')}</button>
+    <button data-act="tmode" data-m="toan" aria-pressed="${S.treeMode === 'toan'}">Toàn họ</button></div>
+    <span class="sp"></span>
+    <button class="zb" data-act="zoom" data-z="-1" aria-label="Thu nhỏ">${ic('zout', 20)}</button>
+    <button class="zb" data-act="zoom" data-z="1" aria-label="Phóng to">${ic('zin', 20)}</button>
+    <button class="zb" data-act="center" aria-label="Về người đang xem">${ic('target', 20)}</button></div>
+    <div class="twrap" id="twrap"><div class="tree" id="tree" style="zoom:${S.zoom}"><ul>${roots.map(r => li(r, 0)).join('')}</ul>
+    <p class="thint">Bấm vào một người để chọn, bấm lần nữa để mở hồ sơ.</p></div></div>`;
+}
+function sizeTree(){ const w = $('#twrap'); if (!w) return;
+  const tabH = ($('.tabs') || {}).offsetHeight || 62; w.style.height = Math.max(260, innerHeight - w.getBoundingClientRect().top - tabH) + 'px'; }
+function centerTree(){ const w = $('#twrap'), el = w && w.querySelector('.nd.on'); if (!el) return;
+  const wr = w.getBoundingClientRect(), r = el.getBoundingClientRect();
+  w.scrollLeft += (r.left + r.width / 2) - (wr.left + wr.width / 2); w.scrollTop += (r.top + r.height / 2) - (wr.top + wr.height / 3); }
+let TD = null, TDW = null;
+addEventListener('pointermove', e => { if (!TD || !TDW) return; const dx = e.clientX - TD.x, dy = e.clientY - TD.y;
+  if (Math.abs(dx) + Math.abs(dy) > 5){ TD.moved = true; TDW.classList.add('drag'); } if (TD.moved){ TDW.scrollLeft = TD.l - dx; TDW.scrollTop = TD.t - dy; } });
+addEventListener('pointerup', () => { if (TD && TD.moved && TDW){ TDW.dataset.dragged = '1'; const w = TDW; setTimeout(() => delete w.dataset.dragged, 50); } TD = null; if (TDW) TDW.classList.remove('drag'); });
+function afterTree(){
+  scrollTo(0, 0); sizeTree(); requestAnimationFrame(centerTree);
+  const w = TDW = $('#twrap');
+  w.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0) return; TD = { x:e.clientX, y:e.clientY, l:w.scrollLeft, t:w.scrollTop, moved:false }; });
+}
+
+/* Dạng 5 */
+function timeHTML(){
+  const ppl = S.list.filter(p => num(p.namSinh, 0) > 0).sort((a, b) => num(a.namSinh) - num(b.namSinh) || byBirth(a.id, b.id));
+  const unknown = S.list.length - ppl.length;
+  if (!ppl.length) return `<div class="wrap gut"><div class="empty">Chưa có ai được nhập năm sinh.</div></div>`;
+  const y0 = Math.floor(num(ppl[0].namSinh) / 10) * 10, y1 = NOW_Y + 2, span = y1 - y0;
+  const step = span > 130 ? 25 : span > 70 ? 20 : 10;
+  const pos = y => ((y - y0) / span * 100);
+  const ticks = []; for (let y = y0; y <= NOW_Y; y += step) ticks.push(y);
+  const used = [...new Set(ppl.map(p => p.chi))];
+  let h = `<div class="wrap gut">${banners()}<div class="legend">${used.map(c => `<span class="k${chiIdx(c)}"><i></i>${esc(chiName(c))}</span>`).join('')}<span>Viền đứt: còn sống</span></div>
+    <div class="axis">${ticks.map(y => `<span style="left:${pos(y)}%">${y}</span>`).join('')}</div><div class="grid">${ticks.map(y => `<span class="gl" style="left:${pos(y)}%"></span>`).join('')}`;
+  ppl.forEach(p => {
+    const s = num(p.namSinh), e = p.conSong ? NOW_Y : num(p.namMat, 0);
+    const l = pos(s), w = e ? Math.max(1.2, pos(e) - l) : 3;
+    const lab = `${esc(p.hoTen.split(/\s+/).slice(-2).join(' '))}${age(p) ? ' · ' + age(p).replace(' tuổi', '') : ''}`;
+    const labPos = l > 52 ? `right:${Math.max(0, 100 - l - w)}%` : `left:${l}%`;
+    h += `<button class="tl k${chiIdx(p.chi)}${p.id === S.focus ? ' on' : ''}" data-act="lfocus" data-id="${p.id}" aria-label="${esc(p.hoTen)}, ${esc(years(p))}">
+      <span class="tb${p.conSong ? ' alive' : ''}" style="left:${l}%;width:${w}%"></span><span class="tlab" style="${labPos}">${lab}</span></button>`;
+  });
+  h += `</div>`;
+  if (unknown) h += `<p class="thint" style="margin-top:12px">${unknown} người chưa có năm sinh nên chưa hiện trên thanh thời gian.</p>`;
+  return h + `</div>`;
+}
+function afterTime(keep){ if (keep) return; const el = document.querySelector('.tl.on'); if (el) el.scrollIntoView({ block:'center' }); }
+
+/* Ngày giỗ */
+function gioList(){
+  const [ld, lm, ly] = LUNAR.s2l(NOW.getDate(), NOW.getMonth() + 1, NOW.getFullYear());
+  const today = LUNAR.jdFromDate(NOW.getDate(), NOW.getMonth() + 1, NOW.getFullYear());
+  const out = [];
+  S.list.forEach(p => { const m = String(p.ngayGio || '').match(/^\s*(\d{1,2})\s*[\/\-.]\s*(\d{1,2})/); if (!m || p.conSong) return;
+    const d = +m[1], mo = +m[2]; if (d < 1 || d > 30 || mo < 1 || mo > 12) return;
+    let s = LUNAR.l2s(d, mo, ly, 0), jd = s && LUNAR.jdFromDate(s[0], s[1], s[2]);
+    if (!s || jd < today){ s = LUNAR.l2s(d, mo, ly + 1, 0); jd = s && LUNAR.jdFromDate(s[0], s[1], s[2]); }
+    if (s) out.push({ p, d, mo, s, left: jd - today });
+  });
+  return { list: out.sort((a, b) => a.left - b.left), today:[ld, lm, ly] };
+}
+const THU = ['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'];
+function gioHTML(){
+  const { list, today } = gioList();
+  let h = `<div class="wrap gut">${banners()}<div class="sec" style="margin-top:4px">Hôm nay</div>
+    <div class="panel" style="font-size:16px">${NOW.getDate()}/${NOW.getMonth() + 1}/${NOW_Y} dương lịch · ngày ${today[0]}/${today[1]} năm ${LUNAR.canChi(today[2])}</div>
+    <div class="sec">Ngày giỗ sắp tới</div>`;
+  if (!list.length) return h + `<div class="empty">Chưa có ai được nhập ngày giỗ.</div></div>`;
+  h += `<div class="list">` + list.map(g => { const dt = new Date(g.s[2], g.s[1] - 1, g.s[0]);
+    const when = g.left === 0 ? '<span class="soon">Hôm nay</span>' : g.left <= 7 ? `<span class="soon">Còn ${g.left} ngày</span>` : `Còn ${g.left} ngày`;
+    return `<button class="gio" data-act="focus" data-id="${g.p.id}"><span class="d"><b>${g.d}/${g.mo}</b><small>âm lịch</small></span>${av(g.p, 44)}
+      <span style="flex:1;min-width:0"><span style="font-family:var(--f-name);font-weight:500">${esc(g.p.hoTen)}</span><br>
+      <span style="font-size:14px;color:var(--muted)">${THU[dt.getDay()]}, ${g.s[0]}/${g.s[1]}/${g.s[2]} · ${when}</span></span></button>`; }).join('') + `</div>`;
+  return h + `</div>`;
+}
+
+/* Quản trị */
+async function loadAdmin(){ try { const [u, l] = await Promise.all([api('users'), api('logs')]); S.users = u.users; S.logs = l.logs; } catch(e){ S.users = []; S.logs = []; toast(e.message); } if (S.view === 'admin') render(true); }
+const ROLE = { admin:'Quản trị', bientap:'Được sửa', xem:'Chỉ xem' };
+const HD = { them:'Thêm', sua:'Sửa', xoa:'Xóa', anh:'Đổi ảnh', mo_nhap_lieu:'Mở nhập liệu', dong_nhap_lieu:'Đóng nhập liệu', tao_tai_khoan:'Tạo tài khoản', sua_tai_khoan:'Sửa tài khoản', khoa_tam:'Khóa tạm', doi_mat_khau:'Đổi mật khẩu', dang_nhap:'Đăng nhập' };
+function adminHTML(){
+  if (!isAdmin()) return `<div class="wrap gut"><div class="empty">Chỉ người quản trị xem được trang này.</div></div>`;
+  const all = S.list, inClan = all.filter(p => !p.ngoaiToc), alive = all.filter(p => p.conSong).length;
+  const gens = Math.max(0, ...all.map(p => num(p.doi, 0))), withPhoto = all.filter(p => p.anhId).length;
+  const byChi = {}; inClan.forEach(p => byChi[p.chi] = (byChi[p.chi] || 0) + 1);
+  const maxC = Math.max(1, ...Object.values(byChi));
+  let h = `<div class="wrap gut">${banners()}<div class="sec" style="margin-top:4px">Thống kê</div>
+    <div class="cards"><div class="card"><b>${all.length}</b><span>người trong gia phả</span></div><div class="card"><b>${alive}</b><span>người còn sống</span></div>
+    <div class="card"><b>${gens}</b><span>đời</span></div><div class="card"><b>${withPhoto}</b><span>người đã có ảnh</span></div></div>
+    <div class="panel" style="margin-top:10px">${Object.keys(byChi).sort((a, b) => a.localeCompare(b, 'vi', { numeric:true })).map(c => `<div class="barrow k${chiIdx(c)}"><span>${esc(chiName(c))}</span><span class="bt"><i style="width:${byChi[c] / maxC * 100}%"></i></span><b>${byChi[c]}</b></div>`).join('')}
+    <p class="thint" style="margin:6px 0 0">Đếm người mang họ trong mỗi chi, không tính dâu rể.</p></div>
+    <div class="sec">Giai đoạn nhập liệu</div>
+    <div class="entry${S.entryMode ? '' : ' off'}"><div style="flex:1"><b style="font-weight:600">${S.entryMode ? 'Đang mở' : 'Đã đóng'}</b><br><span style="font-size:14px">${S.entryMode ? 'Người được sửa nhập được người trong chi của mình.' : 'Chỉ còn quản trị sửa được.'}</span></div>
+    <button class="sw" role="switch" aria-checked="${S.entryMode}" aria-label="Giai đoạn nhập liệu" data-act="entry"></button></div>
+    <div class="sec">Tài khoản</div><div class="panel">`;
+  if (S.users === null) h += `<p class="thint">Đang tải…</p>`;
+  else h += S.users.map(u => {
+    const me = S.me && u.tenDangNhap === S.me.u;
+    return `<div class="urow"><span class="tx"><b style="font-weight:600">${esc(u.hoTen || u.tenDangNhap)}</b> <span class="thint">@${esc(u.tenDangNhap)}</span><br>
+      <span style="font-size:14px;color:var(--muted)">${ROLE[u.vaiTro] || u.vaiTro} · ${esc(chiName(u.chi))}${u.khoa ? ' · <span style="color:var(--danger)">Đã khóa</span>' : ''}${u.khoaTam ? ' · Khóa tạm' : ''}</span></span>
+      ${u.vaiTro !== 'admin' ? `<span style="display:flex;align-items:center;gap:8px;font-size:14px">Được sửa <button class="sw" role="switch" aria-checked="${u.vaiTro === 'bientap'}" aria-label="Quyền sửa của ${esc(u.tenDangNhap)}" data-act="urole" data-u="${esc(u.tenDangNhap)}"></button></span>` : ''}
+      <span style="display:flex;gap:6px;flex-wrap:wrap;width:100%">
+      <button class="btn sm" data-act="ureset" data-u="${esc(u.tenDangNhap)}">${ic('key', 16)}Đặt lại mật khẩu</button>
+      ${!me ? `<button class="btn sm${u.khoa ? '' : ' dng'}" data-act="ulock" data-u="${esc(u.tenDangNhap)}">${u.khoa ? 'Mở khóa' : 'Khóa'}</button>` : ''}</span>
+      ${S.resetFor === u.tenDangNhap ? `<form data-form="reset" data-u="${esc(u.tenDangNhap)}" style="display:flex;gap:8px;width:100%"><input class="inp" id="rs_pw" type="text" minlength="6" placeholder="Mật khẩu mới, ít nhất 6 ký tự" autocomplete="off" style="flex:1"><button class="btn pri sm" type="submit">Lưu</button></form>` : ''}</div>`;
+  }).join('');
+  h += `</div><div class="sec">Thêm tài khoản</div>
+    <form class="panel" data-form="newuser"><div class="two"><label class="fld"><span>Tên đăng nhập</span><input class="inp" id="nu_u" autocomplete="off" autocapitalize="none" placeholder="tuan"></label>
+    <label class="fld"><span>Tên hiển thị</span><input class="inp" id="nu_n" placeholder="Anh Tuấn"></label></div>
+    <div class="two"><label class="fld"><span>Chi</span><select class="inp" id="nu_c"><option value="">Dòng chính</option>${S.chis.map(c => `<option>${esc(c)}</option>`).join('')}</select></label>
+    <label class="fld"><span>Quyền</span><select class="inp" id="nu_r"><option value="xem">Chỉ xem</option><option value="bientap">Được sửa</option><option value="admin">Quản trị</option></select></label></div>
+    <label class="fld"><span>Mật khẩu ban đầu (hoặc mã PIN 6 số)</span><input class="inp" id="nu_p" autocomplete="off" placeholder="123456"></label>
+    <div class="acts"><button class="btn pri" type="submit">${ic('plus', 18)}Tạo tài khoản</button></div></form>
+    <div class="sec">Nhật ký sửa</div><div class="panel">${S.logs === null ? '<p class="thint">Đang tải…</p>' : S.logs.length ? S.logs.slice(0, 60).map(l => `<div class="log"><b style="font-weight:500">${esc(l.ai)}</b> · ${esc(HD[l.hd] || l.hd)} ${esc(l.ten || '')}${l.ct ? ` <span class="thint">(${esc(l.ct)})</span>` : ''}<small>${esc(fmtTime(l.t))}</small></div>`).join('') : '<p class="thint">Chưa có thay đổi nào.</p>'}</div>
+    ${DEMO ? `<div class="sec">Bản chạy thử</div><button class="btn" data-act="resetdemo">Khôi phục dữ liệu mẫu</button>` : ''}</div>`;
+  return h;
+}
+function fmtTime(t){ const d = new Date(t); if (isNaN(d)) return t; return d.toLocaleString('vi-VN', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit', year:'numeric' }); }
+
+/* Đăng nhập */
+function loginHTML(){
+  return `<div class="login gut"><form class="lbox" data-form="login"><div class="seal">${esc((CONFIG.TEN.split(/\s+/).pop() || 'G')[0])}</div>
+  <h1>${esc(CONFIG.TEN)}</h1><p>Đăng nhập để xem gia phả của dòng họ.</p>
+  <div id="lerr"></div>
+  <label class="fld"><span>Tên đăng nhập</span><input class="inp" id="lg_u" autocomplete="username" autocapitalize="none" required></label>
+  <label class="fld"><span>Mật khẩu</span><input class="inp" id="lg_p" type="password" autocomplete="current-password" required></label>
+  <button class="btn pri" type="submit" style="width:100%;margin-top:6px" id="lg_b">Đăng nhập</button>
+  ${DEMO ? `<div class="demo"><b>Tài khoản dùng thử</b> (mật khẩu đều là 123456). Bấm để điền:
+    ${[['admin','Quản trị, sửa được mọi thứ'],['hung','Được sửa Chi 2'],['lan','Được sửa Chi 1'],['khach','Chỉ xem']].map(a => `<button type="button" data-act="fill" data-u="${a[0]}"><span>${a[0]}</span><span class="thint">${a[1]}</span></button>`).join('')}</div>` : ''}
+  </form></div>`;
+}
+
+/* ---------- lớp phủ: tìm, menu, biểu mẫu ---------- */
+function renderOverlay(){
+  const o = $('#ov');
+  if (!S.overlay){ o.innerHTML = ''; document.body.style.overflow = ''; return; }
+  document.body.style.overflow = 'hidden';
+  let inner = '';
+  if (S.overlay === 'search') inner = `<div class="srch"><input class="inp" id="q" type="search" placeholder="Gõ tên, ví dụ: Lộc" autocomplete="off"><button class="ib" data-act="close" aria-label="Đóng">${ic('x')}</button></div><div class="list" id="qres">${searchRes('')}</div>`;
+  else if (S.overlay === 'menu') inner = `<div class="who">Đang đăng nhập: <b>${esc(S.me.hoTen || S.me.u)}</b> · ${ROLE[S.me.vaiTro] || ''}</div><div class="menu">
+    <button class="mi" data-act="view" data-v="gio">${ic('cal')}Ngày giỗ sắp tới</button>
+    ${isAdmin() ? `<button class="mi" data-act="view" data-v="admin">${ic('shield')}Quản trị và thống kê</button>` : ''}
+    <button class="mi" data-act="pw">${ic('key')}Đổi mật khẩu</button>
+    <button class="mi" data-act="logout" style="color:var(--danger)">${ic('out')}Đăng xuất</button></div>`;
+  else if (S.overlay === 'photo'){ const p = P(S.focus); const src = p && p.anhId && S.photos[p.anhId];
+    inner = src ? `<img class="big" src="${src}" alt="Ảnh ${esc(p.hoTen)}"><p style="text-align:center;font-family:var(--f-name);font-size:20px;margin:12px 0 0">${esc(p.hoTen)}</p>` : `<p class="empty">Chưa có ảnh.${canEdit(p) ? ' Bấm "Sửa thông tin" để thêm ảnh.' : ''}</p>`;
+    inner += `<div class="acts"><button class="btn" data-act="close">Đóng</button></div>`; }
+  else if (S.overlay === 'pw') inner = `<form data-form="pw"><h2>Đổi mật khẩu</h2><p class="sub">Đổi xong, các máy khác đang đăng nhập tài khoản này sẽ bị đăng xuất.</p><div id="ferr"></div>
+    <label class="fld"><span>Mật khẩu hiện tại</span><input class="inp" id="pw_o" type="password" autocomplete="current-password"></label>
+    <label class="fld"><span>Mật khẩu mới (ít nhất 6 ký tự)</span><input class="inp" id="pw_n" type="password" autocomplete="new-password"></label>
+    <div class="acts"><button type="button" class="btn" data-act="close">Hủy</button><button class="btn pri" type="submit">Lưu</button></div></form>`;
+  else if (S.overlay === 'form') inner = formHTML();
+  o.innerHTML = `<div class="ov" data-act="scrim"><div class="sheet${S.overlay === 'menu' ? ' menu' : ''}" role="dialog" aria-modal="true">${inner}</div></div>`;
+  const f = o.querySelector('#q, #f_hoTen, #pw_o'); if (f && S.overlay !== 'form') setTimeout(() => f.focus(), 30);
+}
+function searchRes(q){
+  const k = fold(q).trim();
+  const ppl = k ? S.list.filter(p => fold(p.hoTen).includes(k)) : [];
+  if (!k) return `<p class="thint">Gõ một phần tên. Không cần gõ dấu.</p>`;
+  if (!ppl.length) return `<p class="thint">Không thấy ai có tên như vậy.</p>`;
+  return ppl.slice(0, 40).map(p => { const par = clanParent(p) || spouses(p)[0];
+    return rowHTML(p, subLine(p, `Đời ${esc(p.doi || '?')}${par ? (p.ngoaiToc && !clanParent(p) ? ' · vợ/chồng của ' : ' · con ') + esc(par.hoTen) : ''}`)); }).join('');
+}
+
+/* Biểu mẫu thêm, sửa */
+function openForm(mode, rel, id){
+  const base = P(id);
+  let d;
+  if (mode === 'edit') d = Object.assign({}, base);
+  else {
+    d = { hoTen:'', gioiTinh:'nam', chaId:'', meId:'', voChong:'', doi:'', chi:base ? base.chi : '', ngoaiToc:false, namSinh:'', ngaySinh:'', conSong:true, namMat:'', ngayGio:'', anTang:'', dienThoai:'', diaChi:'', ghiChu:'', thuTu:'' };
+    if (rel === 'con'){ const sp = spouses(base)[0]; if (base.gioiTinh === 'nu'){ d.meId = base.id; d.chaId = sp ? sp.id : ''; } else { d.chaId = base.id; d.meId = sp ? sp.id : ''; }
+      d.doi = String(num(base.doi, 0) + 1); d.thuTu = String(kidsOf(base.id).length + 1); }
+    if (rel === 'vo'){ d.voChong = base.id; d.doi = base.doi; d.ngoaiToc = true; d.gioiTinh = base.gioiTinh === 'nu' ? 'nam' : 'nu'; }
+    if (rel === 'anhem'){ d.chaId = base.chaId; d.meId = base.meId; d.doi = base.doi; }
+    if (rel === 'cha'){ d.doi = String(Math.max(1, num(base.doi, 1) - 1)); }
+    if (rel === 'root'){ d.doi = '1'; d.chi = ''; }
+  }
+  S.form = { mode, rel, of:id, d, photo:null, err:'', confirmDel:false };
+  S.overlay = 'form'; renderOverlay();
+}
+function formHTML(){
+  const { mode, rel, d } = S.form, base = P(S.form.of);
+  const title = mode === 'edit' ? 'Sửa thông tin' : { con:'Thêm con', vo: base && base.gioiTinh === 'nu' ? 'Thêm chồng' : 'Thêm vợ', anhem:'Thêm anh chị em', cha:'Thêm cha', root:'Nhập thủy tổ' }[rel];
+  const sub = mode === 'edit' ? esc(d.hoTen) : rel === 'con' ? `Con của ${esc(base.hoTen)} · Đời ${esc(d.doi)}` : rel === 'vo' ? `Của ${esc(base.hoTen)} · Đời ${esc(d.doi)}` : rel === 'anhem' ? `Anh chị em của ${esc(base.hoTen)}` : rel === 'cha' ? `Cha của ${esc(base.hoTen)}` : 'Người đứng đầu gia phả';
+  const cur = S.form.photo || (d.anhId && S.photos[d.anhId]);
+  const radio = (name, val, label, on) => `<label class="chip"><input type="radio" name="${name}" value="${val}"${on ? ' checked' : ''}><span>${label}</span></label>`;
+  let mother = '';
+  if (rel === 'con' && base){ const sps = spouses(base); if (sps.length > 1){ const k = base.gioiTinh === 'nu' ? 'chaId' : 'meId';
+    mother = `<label class="fld"><span>${base.gioiTinh === 'nu' ? 'Cha là' : 'Mẹ là'}</span><select class="inp" id="f_other">${sps.map(s => `<option value="${s.id}"${d[k] === s.id ? ' selected' : ''}>${esc(s.hoTen)}</option>`).join('')}</select></label>`; } }
+  return `<form data-form="person" novalidate><h2>${title}</h2><p class="sub">${sub}</p>${S.form.err ? `<div class="err">${esc(S.form.err)}</div>` : ''}
+    <div class="ph"><span class="pv" id="pv">${cur ? `<img src="${cur}" alt="">` : ic('cam', 28)}</span><span class="bts">
+      <span class="btn sm filebtn">${ic('cam', 18)}Chụp ảnh<input type="file" accept="image/*" capture="environment" data-photo aria-label="Chụp ảnh"></span>
+      <span class="btn sm filebtn">${ic('img', 18)}Chọn ảnh<input type="file" accept="image/*" data-photo aria-label="Chọn ảnh từ máy"></span>
+      <span class="thint" style="width:100%">Ảnh tự cắt vuông và thu nhỏ.</span></span></div>
+    <label class="fld"><span>Họ và tên</span><input class="inp" id="f_hoTen" value="${esc(d.hoTen)}" placeholder="Nguyễn Văn ..." autocomplete="off"></label>
+    <div class="fld"><span>Giới tính</span><div class="chips">${radio('gt', 'nam', 'Nam', d.gioiTinh !== 'nu')}${radio('gt', 'nu', 'Nữ', d.gioiTinh === 'nu')}</div></div>
+    ${mother}
+    <div class="two"><label class="fld"><span>Năm sinh</span><input class="inp" id="f_namSinh" inputmode="numeric" value="${esc(d.namSinh)}" placeholder="1985"></label>
+    <label class="fld"><span>Con thứ</span><input class="inp" id="f_thuTu" inputmode="numeric" value="${esc(d.thuTu)}" placeholder="1"></label></div>
+    <div class="fld"><span>Còn sống?</span><div class="chips">${radio('cs', '1', 'Còn sống', d.conSong)}${radio('cs', '0', 'Đã mất', !d.conSong)}</div></div>
+    <div id="deadF" ${d.conSong ? 'hidden' : ''}><div class="two"><label class="fld"><span>Năm mất</span><input class="inp" id="f_namMat" inputmode="numeric" value="${esc(d.namMat)}" placeholder="1998"></label>
+      <label class="fld"><span>Ngày giỗ (âm lịch)</span><input class="inp" id="f_ngayGio" value="${esc(d.ngayGio)}" placeholder="12/3"></label></div>
+      <label class="fld"><span>Nơi an táng</span><input class="inp" id="f_anTang" value="${esc(d.anTang)}"></label></div>
+    <details class="more-f"${d.ngaySinh || d.dienThoai || d.diaChi || d.ghiChu ? ' open' : ''}><summary>Thêm chi tiết</summary>
+      <label class="fld"><span>Ngày sinh đầy đủ</span><input class="inp" id="f_ngaySinh" value="${esc(d.ngaySinh)}" placeholder="15/08/1985"></label>
+      <label class="fld"><span>Điện thoại</span><input class="inp" id="f_dienThoai" inputmode="tel" value="${esc(d.dienThoai)}"></label>
+      <label class="fld"><span>Địa chỉ</span><input class="inp" id="f_diaChi" value="${esc(d.diaChi)}"></label>
+      <label class="fld"><span>Ghi chú, tiểu sử ngắn</span><textarea class="inp" id="f_ghiChu">${esc(d.ghiChu)}</textarea></label>
+      ${isAdmin() ? `<div class="two"><label class="fld"><span>Chi</span><input class="inp" id="f_chi" value="${esc(d.chi)}" list="chis" placeholder="Chi 1"><datalist id="chis">${S.chis.map(c => `<option value="${esc(c)}">`).join('')}</datalist></label>
+        <label class="fld"><span>Đời thứ</span><input class="inp" id="f_doi" inputmode="numeric" value="${esc(d.doi)}"></label></div>
+        <div class="fld"><span>Là dâu hoặc rể (người ngoài họ)</span><div class="chips">${radio('nt', '0', 'Không', !d.ngoaiToc)}${radio('nt', '1', 'Có', d.ngoaiToc)}</div></div>` : ''}
+    </details>
+    <div class="acts">${mode === 'edit' && isAdmin() ? `<button type="button" class="btn dng" data-act="delp" style="margin-right:auto">${S.form.confirmDel ? 'Bấm lần nữa để xóa' : 'Xóa'}</button>` : ''}
+      <button type="button" class="btn" data-act="close">Hủy</button><button class="btn pri" type="submit" id="f_save">Lưu</button></div></form>`;
+}
+function readForm(){
+  const v = id => { const el = $('#' + id); return el ? el.value.trim() : null; };
+  const r = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+  const d = Object.assign({}, S.form.d);
+  d.hoTen = v('f_hoTen'); d.gioiTinh = r('gt') || 'nam'; d.namSinh = v('f_namSinh'); d.thuTu = v('f_thuTu');
+  d.conSong = r('cs') !== '0';
+  ['namMat','ngayGio','anTang','ngaySinh','dienThoai','diaChi','ghiChu'].forEach(k => { const x = v('f_' + k); if (x !== null) d[k] = x; });
+  if (d.conSong){ d.namMat = ''; d.ngayGio = ''; }
+  if (isAdmin()){ if (v('f_chi') !== null) d.chi = v('f_chi'); if (v('f_doi') !== null) d.doi = v('f_doi'); const nt = r('nt'); if (nt) d.ngoaiToc = nt === '1'; }
+  const o = $('#f_other'); if (o){ const base = P(S.form.of); d[base.gioiTinh === 'nu' ? 'chaId' : 'meId'] = o.value; }
+  return d;
+}
+function checkForm(d){
+  if (!d.hoTen) return 'Chưa nhập họ tên.';
+  if (d.namSinh && !/^\d{3,4}$/.test(d.namSinh)) return 'Năm sinh chỉ gồm 4 chữ số, ví dụ 1985.';
+  if (d.namSinh && num(d.namSinh) > NOW_Y) return 'Năm sinh lớn hơn năm hiện tại.';
+  if (d.namMat && !/^\d{3,4}$/.test(d.namMat)) return 'Năm mất chỉ gồm 4 chữ số.';
+  if (d.namSinh && d.namMat && num(d.namMat) < num(d.namSinh)) return 'Năm mất đang nhỏ hơn năm sinh.';
+  if (d.ngayGio && !/^\s*\d{1,2}\s*[\/\-.]\s*\d{1,2}\s*$/.test(d.ngayGio)) return 'Ngày giỗ ghi theo dạng ngày/tháng âm, ví dụ 12/3.';
+  return '';
+}
+async function submitPerson(){
+  const d = readForm(); const err = checkForm(d);
+  S.form.d = d;
+  if (err){ S.form.err = err; renderOverlay(); const e = $('.sheet'); if (e) e.scrollTop = 0; return; }
+  const btn = $('#f_save'); btn.disabled = true; btn.textContent = 'Đang lưu…';
+  try {
+    const r = await api('save', { person: d }); const p = r.person;
+    const isNew = !S.list.some(x => x.id === p.id);
+    let arr = S.list.filter(x => x.id !== p.id).concat([Object.assign({}, P(p.id) || {}, p)]);
+    if (p.voChong) p.voChong.split(',').forEach(sid => { const s = arr.find(x => x.id === sid); if (s){ const l = String(s.voChong || '').split(',').filter(Boolean); if (!l.includes(p.id)){ l.push(p.id); arr = arr.map(x => x.id === sid ? Object.assign({}, x, { voChong:l.join(',') }) : x); } } });
+    reindex(arr);
+    if (S.form.photo){ const ph = await api('uploadPhoto', { id:p.id, data:S.form.photo }); S.photos[ph.anhId] = S.form.photo; IDB.set(ph.anhId, S.form.photo); P(p.id).anhId = ph.anhId; }
+    if (S.form.rel === 'cha'){ const child = Object.assign({}, P(S.form.of)); child[p.gioiTinh === 'nu' ? 'meId' : 'chaId'] = p.id;
+      const r2 = await api('save', { person: child }); reindex(S.list.map(x => x.id === child.id ? Object.assign({}, x, r2.person) : x)); }
+    if (S.form.rel === 'root') S.focus = p.id;
+    const name = p.hoTen; S.overlay = null; S.form = null; renderOverlay(); render(true);
+    toast(isNew ? 'Đã thêm ' + name : 'Đã lưu');
+  } catch(e){ S.form.err = e.message; renderOverlay(); }
+}
+
+/* ---------- sự kiện ---------- */
+document.addEventListener('click', async e => {
+  const t = e.target.closest('[data-act]'); if (!t) return;
+  const a = t.dataset.act, id = t.dataset.id;
+  if (a === 'scrim'){ if (e.target === t && S.overlay !== 'form'){ S.overlay = null; renderOverlay(); } return; }
+  switch (a){
+    case 'fill': $('#lg_u').value = t.dataset.u; $('#lg_p').value = '123456'; break;
+    case 'home': go('family'); break;
+    case 'tab': go(t.dataset.v); break;
+    case 'focus': S.overlay = null; S.form = null; renderOverlay(); go(S.view === 'tree' || S.view === 'time' ? S.view : 'family', id); if (S.view === 'family') scrollTo(0, 0); break;
+    case 'tfocus': { const w = $('#twrap'); if (w && w.dataset.dragged) return;
+      if (id === S.focus) go('family'); else { S.focus = id; store.set('gp_focus', id); render(); } break; }
+    case 'lfocus': if (id === S.focus) go('family'); else { S.focus = id; store.set('gp_focus', id); render(true); } break;
+    case 'tmode': S.treeMode = t.dataset.m; render(); break;
+    case 'zoom': S.zoom = Math.min(1.6, Math.max(0.4, Math.round((S.zoom + 0.2 * +t.dataset.z) * 10) / 10)); { const tr = $('#tree'); if (tr) tr.style.zoom = S.zoom; requestAnimationFrame(centerTree); } break;
+    case 'center': centerTree(); break;
+    case 'search': S.overlay = 'search'; renderOverlay(); break;
+    case 'menu': S.overlay = 'menu'; renderOverlay(); break;
+    case 'close': S.overlay = null; S.form = null; renderOverlay(); break;
+    case 'view': S.overlay = null; renderOverlay(); if (t.dataset.v === 'admin'){ S.users = null; S.logs = null; } go(t.dataset.v); break;
+    case 'pw': S.overlay = 'pw'; renderOverlay(); break;
+    case 'logout': logout(); break;
+    case 'zoomphoto': S.overlay = 'photo'; renderOverlay(); break;
+    case 'edit': openForm('edit', null, id); break;
+    case 'add': openForm('new', t.dataset.rel, id); break;
+    case 'addroot': openForm('new', 'root', null); break;
+    case 'delp': if (!S.form.confirmDel){ S.form.d = readForm(); S.form.confirmDel = true; renderOverlay(); break; }
+      try { await api('delete', { id:S.form.d.id }); const del = S.form.d.id; reindex(S.list.filter(x => x.id !== del).map(x => Object.assign({}, x, { voChong:String(x.voChong || '').split(',').filter(i => i && i !== del).join(',') })));
+        S.focus = defaultFocus(); S.overlay = null; S.form = null; renderOverlay(); render(); toast('Đã xóa'); }
+      catch(er){ S.form.err = er.message; S.form.confirmDel = false; renderOverlay(); } break;
+    case 'entry': try { const r = await api('setEntryMode', { on: !S.entryMode }); S.entryMode = r.entryMode; S.logs = null; render(true); loadAdmin(); toast(S.entryMode ? 'Đã mở nhập liệu' : 'Đã đóng nhập liệu. Chỉ còn quản trị sửa được.'); } catch(er){ toast(er.message); } break;
+    case 'urole': { const u = S.users.find(x => x.tenDangNhap === t.dataset.u);
+      try { const r = await api('saveUser', { user:{ tenDangNhap:u.tenDangNhap, vaiTro: u.vaiTro === 'bientap' ? 'xem' : 'bientap' } }); S.users = r.users; render(true); } catch(er){ toast(er.message); } break; }
+    case 'ulock': { const u = S.users.find(x => x.tenDangNhap === t.dataset.u);
+      try { const r = await api('saveUser', { user:{ tenDangNhap:u.tenDangNhap, vaiTro:u.vaiTro, khoa: !u.khoa } }); S.users = r.users; render(true); toast(u.khoa ? 'Đã mở khóa' : 'Đã khóa, máy kia bị đăng xuất'); } catch(er){ toast(er.message); } break; }
+    case 'ureset': S.resetFor = S.resetFor === t.dataset.u ? null : t.dataset.u; render(true); { const i = $('#rs_pw'); if (i) i.focus(); } break;
+    case 'resetdemo': DB = demoSeed(); demoSave(); S.users = null; S.logs = null; S.photos = {}; S.asked = {}; S.focus = 'p5'; await loadData(); toast('Đã khôi phục dữ liệu mẫu'); break;
+  }
+});
+document.addEventListener('input', e => { if (e.target.id === 'q') $('#qres').innerHTML = searchRes(e.target.value); });
+document.addEventListener('change', async e => {
+  const t = e.target;
+  if (t.name === 'cs'){ const box = $('#deadF'); if (box) box.hidden = t.value === '1'; }
+  if (t.matches('[data-photo]') && t.files && t.files[0]){
+    try { S.form.photo = await readPhoto(t.files[0]); $('#pv').innerHTML = `<img src="${S.form.photo}" alt="">`; } catch(er){ toast(er.message); }
+    t.value = '';
+  }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.overlay){ S.overlay = null; S.form = null; renderOverlay(); } });
+document.addEventListener('submit', async e => {
+  const f = e.target.closest('form[data-form]'); if (!f) return; e.preventDefault();
+  const kind = f.dataset.form;
+  if (kind === 'login'){
+    const b = $('#lg_b'); b.disabled = true; b.textContent = 'Đang đăng nhập…'; $('#lerr').innerHTML = '';
+    try { const r = await api('login', { u:$('#lg_u').value, p:$('#lg_p').value }); S.token = r.token; S.me = r.me; store.set('gp_token', r.token);
+      S.view = isPhone() ? (isLand() ? 'tree' : 'family') : 'tree'; S.treeMode = isPhone() ? 'quanh' : 'toan'; await loadData(); }
+    catch(er){ $('#lerr').innerHTML = `<div class="err">${esc(er.message)}</div>`; b.disabled = false; b.textContent = 'Đăng nhập'; }
+  }
+  if (kind === 'person') submitPerson();
+  if (kind === 'pw'){ try { const r = await api('changePassword', { old:$('#pw_o').value, new:$('#pw_n').value }); S.token = r.token; store.set('gp_token', r.token); S.overlay = null; renderOverlay(); toast('Đã đổi mật khẩu'); }
+    catch(er){ $('#ferr').innerHTML = `<div class="err">${esc(er.message)}</div>`; } }
+  if (kind === 'reset'){ const pw = $('#rs_pw').value.trim(); if (pw.length < 6){ toast('Mật khẩu tối thiểu 6 ký tự'); return; }
+    const u = S.users.find(x => x.tenDangNhap === f.dataset.u);
+    try { const r = await api('saveUser', { user:{ tenDangNhap:u.tenDangNhap, vaiTro:u.vaiTro, matKhau:pw } }); S.users = r.users; S.resetFor = null; render(true); toast('Đã đặt lại mật khẩu cho ' + u.tenDangNhap); } catch(er){ toast(er.message); } }
+  if (kind === 'newuser'){
+    const user = { tenDangNhap:$('#nu_u').value, hoTen:$('#nu_n').value.trim(), chi:$('#nu_c').value, vaiTro:$('#nu_r').value, matKhau:$('#nu_p').value.trim() };
+    try { const r = await api('saveUser', { user }); S.users = r.users; S.logs = null; render(true); loadAdmin(); toast('Đã tạo tài khoản ' + user.tenDangNhap.trim().toLowerCase()); } catch(er){ toast(er.message); } }
+});
+
+/* ---------- khởi động ---------- */
+(async function start(){
+  await IDB.open();
+  S.token = store.get('gp_token');
+  if (!S.token){ render(); return; }
+  S.view = isPhone() ? (isLand() ? 'tree' : 'family') : 'tree'; S.treeMode = isPhone() ? 'quanh' : 'toan';
+  if (!DEMO){ const cached = store.get('gp_data'); if (cached){ applyData(cached); render(); } }
+  await loadData();
+})();
+if (!DEMO && 'serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+
+</body>
+</html>
