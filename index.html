@@ -290,6 +290,15 @@ textarea.inp{height:auto;min-height:72px;padding:10px 12px}
 .kd{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--muted);margin:-4px 0 12px}
 .kd input{width:20px;height:20px;accent-color:var(--accent)}
 .tenhuy{color:var(--muted);font-size:15px;margin:-2px 0 4px}
+/* Gọi thế nào, Quê hương */
+.xhres{background:var(--accent-soft);border-radius:14px;padding:14px 16px;margin:4px 0 12px}
+.xhres p{margin:0;color:var(--accent-text);font-size:15px}
+.xhres b{display:block;font-family:var(--f-name);font-size:26px;font-weight:600;line-height:1.25;margin:2px 0 8px}
+.xhres b:last-child{margin-bottom:0}
+.xhpath{font-size:14px;color:var(--muted);margin:0 0 12px;line-height:1.6}
+.que .ql{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px;margin:0 0 10px}
+.que .ql dt{color:var(--faint)} .que .ql dd{margin:0;min-width:0;overflow-wrap:anywhere}
+a.btn{text-decoration:none;color:inherit}
 @media print{
   body::before,.hdr,.tabs,.tctl,.thint,.banner,.toast,#ov{display:none!important}
   body{background:#fff} main{padding:0!important}
@@ -328,7 +337,7 @@ textarea.inp{height:auto;min-height:72px;padding:10px 12px}
 const CONFIG = { API_URL: 'https://script.google.com/macros/s/AKfycbwKWNfHVk_fH6wH44f3O-ZhwfhQ17-jSDgwqGB54-So75Hv4UuFHjZuwotfa9M3DJb3uw/exec', TEN: 'Gia phả họ Nguyễn' };
 
 const DEMO = !CONFIG.API_URL;
-const NEED_SERVER = '4';
+const NEED_SERVER = '5';
 const NOW = new Date();
 const NOW_Y = NOW.getFullYear();
 const S = { token:null, me:null, people:{}, list:[], kids:{}, chis:[], entryMode:true, title:CONFIG.TEN, calView:'list', calY:NOW.getFullYear(), calM:NOW.getMonth() + 1, calSel:null, calRange:3, hist:[], opts:{ sinhNhat:false }, hform:null,
@@ -520,7 +529,7 @@ async function api(action, payload = {}){
 }
 
 /* ---------- dữ liệu chạy thử ---------- */
-const DEMO_KEY = 'gp_demo_v3';
+const DEMO_KEY = 'gp_demo_v4';
 function demoSeed(){
   const L = [];
   const mk = (id, hoTen, gt, doi, chi, ns, nm, o = {}) => L.push(Object.assign({ id, hoTen, gioiTinh:gt, chaId:'', meId:'', voChong:'', doi:String(doi), chi,
@@ -531,7 +540,9 @@ function demoSeed(){
   mk('p2w','Trần Thị Nhàn','nu',2,'Chi 1',1905,1980,{ voChong:'p2', ngoaiToc:true, ngayGio:'20/6' });
   mk('p3','Nguyễn Văn Phát','nam',2,'Chi 2',1906,1972,{ chaId:'p1', meId:'p1w', voChong:'p3w', ngayGio:'25/11', thuTu:'2' });
   mk('p3w','Võ Thị Sen','nu',2,'Chi 2',1910,1985,{ voChong:'p3', ngoaiToc:true, ngayGio:'14/7' });
-  mk('p4','Nguyễn Thị Hiền','nu',2,'',1910,1990,{ chaId:'p1', meId:'p1w', ngayGio:'3/2', thuTu:'3' });
+  mk('p4','Nguyễn Thị Hiền','nu',2,'',1910,1990,{ chaId:'p1', meId:'p1w', voChong:'p4h', ngayGio:'3/2', thuTu:'3' });
+  mk('p4h','Lê Văn Sang','nam',2,'',1905,1975,{ voChong:'p4', ngoaiToc:true, ngayGio:'9/8' });
+  mk('p4c','Lê Văn Phước','nam',3,'',1935,2010,{ chaId:'p4h', meId:'p4', thuTu:'1', ngayGio:'2/2' });
   mk('p5','Nguyễn Văn Lộc','nam',3,'Chi 1',1925,1998,{ chaId:'p2', meId:'p2w', voChong:'p5w', ngayGio:'12/3', anTang:'Nghĩa trang họ, Quảng Ngãi', thuTu:'1' });
   mk('p5w','Phạm Thị Mai','nu',3,'Chi 1',1928,2010,{ voChong:'p5', ngoaiToc:true, ngayGio:'20/10' });
   mk('p6','Nguyễn Thị Lan','nu',3,'Chi 1',1929,2015,{ chaId:'p2', meId:'p2w', ngayGio:'9/9', thuTu:'2' });
@@ -557,8 +568,10 @@ function demoSeed(){
   const NS = { p9:'28/11/1935', p10:'14/11/1952', p10w:'02/12/1955', p11:'25/11/1956', p12:'21/01/1960', p14:'30/11/1958', p14w:'08/03/1961', p15:'09/12/1962',
     p16:'10/12/1978', p16w:'17/04/1980', p17:'05/11/1981', p18:'03/12/1985', p19:'22/11/1990', p20:'19/11/2008', p21:'06/01/2012' };
   L.forEach(p => { p.ngaySinh = NS[p.id] || ''; p.tenHuy = ''; p.nguon = ''; });
-  L[0].tenHuy = 'Húy Phúc Thịnh, tự Đức Hậu'; L[0].nguon = 'Gia phả giấy chữ Hán, chép lại năm 1962'; L[13].nguon = 'Lời ông Khoa kể, 2026';
+  L[0].tenHuy = 'Húy Phúc Thịnh, tự Đức Hậu'; L[0].nguon = 'Gia phả giấy chữ Hán, chép lại năm 1962'; L.find(x => x.id === 'p9').nguon = 'Lời ông Khoa kể, 2026';
   const history = [
+    { id:'q1', loai:'que', thuTu:'1', thoiGian:'', tieuDe:'Quê gốc', tenCu:'Làng Phú Lộc, tổng An Phú, phủ Tĩnh Gia, tỉnh Thanh Hóa (minh họa)', tenMoi:'Xã Phú Lộc, tỉnh Thanh Hóa (minh họa)', banDo:'', noiDung:'Theo lời các cụ kể lại, làng nằm ven sông, dân làng sống bằng nghề trồng lúa và đánh cá. Cụ Phúc rời làng khoảng năm 1880.\n\nĐây là nội dung minh họa. Anh gửi câu chuyện thật, tôi sẽ biên tập lại.' },
+    { id:'q2', loai:'que', thuTu:'2', thoiGian:'', tieuDe:'Nơi lập nghiệp', tenCu:'Làng An Hòa, phủ Bình Sơn, tỉnh Quảng Ngãi (minh họa)', tenMoi:'Xã An Hòa, tỉnh Quảng Ngãi (minh họa)', banDo:'', noiDung:'Nơi cụ Phúc khai hoang, dựng nhà thờ họ năm 1925.' },
     { id:'h1', loai:'bai', thuTu:'1', thoiGian:'', tieuDe:'Nguồn gốc dòng họ', noiDung:'Theo gia phả giấy chép lại năm 1962, cụ Nguyễn Văn Phúc từ làng gốc ở Thanh Hóa vào lập nghiệp tại Quảng Ngãi khoảng cuối thế kỷ 19, khai hoang lập làng và dựng nhà thờ họ.\n\nĐây là nội dung minh họa. Khi dùng thật, người quản lý sẽ thay bằng lịch sử thật của họ mình.' },
     { id:'h2', loai:'bai', thuTu:'2', thoiGian:'', tieuDe:'Nhà thờ họ', noiDung:'Nhà thờ họ do cụ Thọ dựng năm 1925, trùng tu năm 2008. Ngày giỗ tổ là 15 tháng 10 âm lịch, con cháu các chi về dâng hương.' },
     { id:'h3', loai:'moc', thuTu:'', thoiGian:'Khoảng 1880', tieuDe:'Cụ Phúc vào Quảng Ngãi lập nghiệp', noiDung:'' },
@@ -566,7 +579,7 @@ function demoSeed(){
     { id:'h5', loai:'moc', thuTu:'', thoiGian:'1962', tieuDe:'Chép lại gia phả giấy', noiDung:'' },
     { id:'h6', loai:'moc', thuTu:'', thoiGian:'2008', tieuDe:'Trùng tu nhà thờ họ', noiDung:'Con cháu các chi cùng góp công, góp của.' },
     { id:'h7', loai:'moc', thuTu:'', thoiGian:'2026', tieuDe:'Lập gia phả trên điện thoại', noiDung:'' }];
-  return { people:L, entryMode:true, logs:[], photos:{}, history, opts:{ sinhNhat:false }, users:[
+  return { people:L, entryMode:true, logs:[], photos:{}, history, opts:{ sinhNhat:false, ngoaiTon:true, xungHo:'bac' }, users:[
     { tenDangNhap:'admin', hoTen:'Quản trị', vaiTro:'admin', chi:'', pw:'123456', khoa:false, sai:0 },
     { tenDangNhap:'hung', hoTen:'Hùng', vaiTro:'bientap', chi:'Chi 2', pw:'123456', khoa:false, sai:0 },
     { tenDangNhap:'lan', hoTen:'Lan', vaiTro:'bientap', chi:'Chi 1', pw:'123456', khoa:false, sai:0 },
@@ -597,7 +610,7 @@ async function demoApi(a, y){
   const seePriv = chi => nd.vaiTro === 'admin' || (nd.vaiTro === 'bientap' && String(chi || '') === String(nd.chi || ''));
   const clone = p => { const o = JSON.parse(JSON.stringify(p)); o.chi = effChi(p); if (o.conSong && !seePriv(o.chi)){ const m = String(o.ngaySinh || '').match(/^\s*(\d{1,2})\s*[\/\-.]\s*(\d{1,2})/); o.dienThoai = ''; o.diaChi = ''; o.ngaySinh = ''; if (db.opts.sinhNhat && m) o.sinhNhat = m[1] + '/' + m[2]; } if (nd.vaiTro === 'xem') o.nguon = ''; return o; };
   switch (a){
-    case 'data': return { people: db.people.map(clone), me:{ u:nd.tenDangNhap, hoTen:nd.hoTen, vaiTro:nd.vaiTro, chi:nd.chi }, entryMode: db.entryMode, title: CONFIG.TEN, history: db.history, options: Object.assign({ sinhNhat: !!db.opts.sinhNhat }, nd.vaiTro === 'admin' ? { autoBackup:true, lastBackup: db.lastBackup || '' } : {}), serverVersion:'4' };
+    case 'data': return { people: db.people.map(clone), me:{ u:nd.tenDangNhap, hoTen:nd.hoTen, vaiTro:nd.vaiTro, chi:nd.chi }, entryMode: db.entryMode, title: CONFIG.TEN, history: db.history, options: Object.assign({ sinhNhat: !!db.opts.sinhNhat, ngoaiTon: db.opts.ngoaiTon !== false, xungHo: db.opts.xungHo === 'nam' ? 'nam' : 'bac' }, nd.vaiTro === 'admin' ? { autoBackup:true, lastBackup: db.lastBackup || '' } : {}), serverVersion:'5' };
     case 'save': { const p = y.person; const cu = p.id ? db.people.find(x => x.id === p.id) : null;
       if (!String(p.hoTen || '').trim()) throw new Error('Chưa nhập họ tên');
       if (cu && p.capNhatLuc != null && String(cu.capNhatLuc || '') !== String(p.capNhatLuc || '')) throw new Error('Hồ sơ này vừa được người khác sửa. Đóng lại, mở lại hồ sơ để xem bản mới rồi sửa tiếp.');
@@ -641,7 +654,9 @@ async function demoApi(a, y){
     case 'saveHist': { const x = Object.assign({}, y.item); if (!String(x.tieuDe || '').trim()) throw new Error('Chưa nhập tiêu đề');
       if (!x.id) x.id = 'H' + Date.now().toString(36); db.history = db.history.filter(h => h.id !== x.id).concat([x]); demoLog(nd.tenDangNhap, 'lich_su', '', x.tieuDe); demoSave(); return { item:x }; }
     case 'delHist': db.history = db.history.filter(h => h.id !== y.id); demoSave(); return { deleted:y.id };
-    case 'setOption': if (y.key === 'sinhNhat') db.opts.sinhNhat = !!y.on; demoLog(nd.tenDangNhap, 'tuy_chon', '', '', 'Sinh nhật: ' + (y.on ? 'hiện' : 'ẩn')); demoSave(); return { options:{ sinhNhat: !!db.opts.sinhNhat } };
+    case 'setOption': if (y.key === 'ngoaiTon') db.opts.ngoaiTon = !!y.on; if (y.key === 'xungHo') db.opts.xungHo = y.value === 'nam' ? 'nam' : 'bac';
+      if (y.key === 'ngoaiTon' || y.key === 'xungHo'){ demoSave(); return { options:{ sinhNhat: !!db.opts.sinhNhat, ngoaiTon: db.opts.ngoaiTon !== false, xungHo: db.opts.xungHo, autoBackup:true, lastBackup: db.lastBackup || '' } }; }
+      if (y.key === 'sinhNhat') db.opts.sinhNhat = !!y.on; demoLog(nd.tenDangNhap, 'tuy_chon', '', '', 'Sinh nhật: ' + (y.on ? 'hiện' : 'ẩn')); demoSave(); return { options:{ sinhNhat: !!db.opts.sinhNhat } };
     case 'setEntryMode': db.entryMode = !!y.on; demoLog(nd.tenDangNhap, y.on ? 'mo_nhap_lieu' : 'dong_nhap_lieu'); demoSave(); return { entryMode: db.entryMode };
     case 'logs': return { logs: db.logs };
     case 'saveUser': { const t = y.user, ten = String(t.tenDangNhap || '').trim().toLowerCase();
@@ -751,7 +766,7 @@ function familyHTML(){
   h += `<section class="hero" style="margin-top:${pars.length ? 14 : 4}px"><button data-act="zoomphoto" aria-label="Xem ảnh lớn" style="display:block;margin:0 auto">${av(p, 116)}</button>
     <h1>${esc(p.hoTen)}</h1>${p.tenHuy ? `<div class="tenhuy">${esc(p.tenHuy)}</div>` : ''}<div class="meta">${meta.join(' · ')}${!p.conSong ? ' <span class="tag">Đã mất</span>' : ''}</div>
     ${facts.length ? `<dl class="facts">${facts.map(f => `<dt>${f[0]}</dt><dd>${f[1]}</dd>`).join('')}</dl>` : ''}
-    ${canEdit(p) ? `<div style="margin-top:12px"><button class="btn sm" data-act="edit" data-id="${p.id}">${ic('edit', 18)}Sửa thông tin</button></div>` : ''}</section>`;
+    <div class="acts" style="justify-content:center;margin-top:12px"><button class="btn sm" data-act="xh" data-id="${p.id}">${ic('fam', 18)}Gọi thế nào?</button>${canEdit(p) ? `<button class="btn sm" data-act="edit" data-id="${p.id}">${ic('edit', 18)}Sửa thông tin</button>` : ''}</div></section>`;
   if (sps.length) h += `<div class="sec">${p.gioiTinh === 'nu' ? 'Chồng' : 'Vợ'}</div><div class="list">${sps.map(x => rowHTML(x, subLine(x))).join('')}</div>`;
   if (kids.length) h += `<div class="sec">Các con (${kids.length})</div><div class="list">${kids.map(x => rowHTML(x, subLine(x, kidsOf(x.id).length ? kidsOf(x.id).length + ' con' : ''))).join('')}</div>`;
   if (sibs.length) h += `<div class="sec">Anh chị em (${sibs.length})</div><div class="list">${sibs.map(x => rowHTML(x, subLine(x))).join('')}</div>`;
@@ -775,13 +790,16 @@ function treeRoots(){
 function countDesc(id, seen = new Set()){ let n = 0; kidsOf(id).forEach(k => { if (!seen.has(k.id)){ seen.add(k.id); n += 1 + countDesc(k.id, seen); } }); return n; }
 function treeHTML(){
   const roots = treeRoots(), seen = new Set(), maxD = S.treeMode === 'toan' ? 99 : 4;
-  const sp = p => { const s = spouses(p); return s.length ? `<span class="sp">& ${s.map(x => esc(shortName(x))).join(', ')}</span>` : ''; };
+  const sp = p => { const s = spouses(p); return s.length ? `<span class="sp">${p.gioiTinh === 'nu' ? 'Chồng' : 'Vợ'}: ${s.map(x => esc(x.hoTen)).join(', ')}</span>` : ''; };
   function li(p, d){
     if (seen.has(p.id)) return ''; seen.add(p.id);
-    const kids = kidsOf(p.id).filter(k => !seen.has(k.id));
+    let kids = kidsOf(p.id).filter(k => !seen.has(k.id)), ngoai = '';
+    if (S.opts.ngoaiTon === false && p.gioiTinh === 'nu' && !p.ngoaiToc){
+      const an = kids.filter(k => { const c = P(k.chaId); return !c || c.ngoaiToc; });
+      if (an.length){ kids = kids.filter(k => !an.includes(k)); ngoai = `<span class="sp">${an.length} con (bên ngoại)</span>`; } }
     let ch = '';
     if (kids.length){ ch = d >= maxD ? `<ul><li><button class="more" data-act="tfocus" data-id="${kids[0].id}">+ ${countDesc(p.id)} người</button></li></ul>` : `<ul>${kids.map(k => li(k, d + 1)).join('')}</ul>`; }
-    return `<li><button class="nd k${chiIdx(p.chi)}${p.id === S.focus ? ' on' : ''}" data-act="tfocus" data-id="${p.id}">${av(p, 40)}<span class="nm">${esc(p.hoTen)}</span><span class="yr">${esc(years(p).replace('Sinh ', ''))}</span>${sp(p)}</button>${ch}</li>`;
+    return `<li><button class="nd k${chiIdx(p.chi)}${p.id === S.focus ? ' on' : ''}" data-act="tfocus" data-id="${p.id}">${av(p, 40)}<span class="nm">${esc(p.hoTen)}</span><span class="yr">${esc(years(p).replace('Sinh ', ''))}</span>${sp(p)}${ngoai}</button>${ch}</li>`;
   }
   const f = P(S.focus);
   return `<div class="tctl gut"><div class="seg" role="group" aria-label="Phạm vi cây">
@@ -896,21 +914,110 @@ function calHTML(){
   return h + hint + `</div>`;
 }
 
+/* Xưng hô: tính theo đường huyết thống (cha, mẹ), vai vế ngành trên/ngành dưới, và quan hệ dâu rể */
+const XR = () => S.opts.xungHo === 'nam' ? 'nam' : 'bac';
+function upPaths(a){ const m = new Map(), q = [[a, 0, [a]]];
+  while (q.length){ const [x, d, pa] = q.shift(); if (m.has(x)) continue; m.set(x, { d, pa }); const p = P(x); if (!p || d > 40) continue;
+    [p.chaId, p.meId].forEach(y => { if (y && P(y) && !m.has(y)) q.push([y, d + 1, pa.concat(y)]); }); }
+  return m; }
+function bloodRel(a, b){ const A = upPaths(a), B = upPaths(b); let r = null;
+  A.forEach((va, k) => { const vb = B.get(k); if (vb && (!r || va.d + vb.d < r.up + r.down)) r = { L:k, up:va.d, down:vb.d, pa:va.pa, pb:vb.pa }; });
+  return r; }
+function olderThan(x, y){
+  if (!x || !y) return null;
+  const sameParents = x.chaId && x.chaId === y.chaId || x.meId && x.meId === y.meId;
+  if (sameParents && x.thuTu && y.thuTu && num(x.thuTu) !== num(y.thuTu)) return num(x.thuTu) < num(y.thuTu);
+  const a = num(x.namSinh, 0), b = num(y.namSinh, 0); if (a && b && a !== b) return a < b;
+  if (x.thuTu && y.thuTu && num(x.thuTu) !== num(y.thuTu)) return num(x.thuTu) < num(y.thuTu);
+  return null; }
+function bloodTerm(a, b, r){
+  const R = XR(), B = P(b), f = B.gioiTinh === 'nu', { up, down, pa, pb } = r, d = up - down;
+  if (!up && !down) return 'chính bạn';
+  if (!down){ if (up === 1) return f ? 'mẹ' : (R === 'nam' ? 'ba' : 'bố');
+    const side = P(pa[1]).gioiTinh === 'nu' ? 'ngoại' : 'nội';
+    if (up === 2) return (f ? 'bà ' : 'ông ') + side; if (up === 3) return f ? 'cụ bà' : 'cụ ông'; if (up === 4) return f ? 'kỵ bà' : 'kỵ ông';
+    return 'tổ tiên (trên ' + up + ' đời)'; }
+  if (!up){ if (down === 1) return f ? 'con gái' : 'con trai';
+    if (down === 2) return 'cháu ' + (P(pb[1]).gioiTinh === 'nu' ? 'ngoại' : 'nội');
+    if (down === 3) return 'chắt'; if (down === 4) return 'chít'; return 'cháu đời thứ ' + down; }
+  const side = P(pa[1]).gioiTinh === 'nu' ? 'ngoại' : 'nội';
+  const bOld = olderThan(P(pb[down - 1]), P(pa[up - 1]));
+  if (d === 0){ const o = up === 1 ? olderThan(B, P(a)) : bOld, ho = up >= 2 ? ' họ' : '';
+    if (o === true) return (f ? 'chị' : 'anh') + ho; if (o === false) return (f ? 'em gái' : 'em trai') + ho;
+    return (f ? 'chị (hoặc em gái)' : 'anh (hoặc em trai)') + ho; }
+  if (d === 1){ const ho = down >= 2 ? ' họ' : ''; let t;
+    if (side === 'nội') t = f ? (R === 'bac' && bOld ? 'bác' : 'cô') : (bOld === true ? 'bác' : bOld === false ? 'chú' : 'bác (hoặc chú)');
+    else t = f ? (R === 'bac' && bOld ? 'bác' : 'dì') : (R === 'bac' && bOld ? 'bác' : 'cậu');
+    return t + ho; }
+  if (d === 2) return (f ? 'bà ' : 'ông ') + (side === 'nội' ? 'họ nội' : 'họ ngoại');
+  if (d >= 3) return f ? 'cụ bà (họ)' : 'cụ ông (họ)';
+  if (d === -1) return 'cháu' + (up >= 2 ? ' họ' : '');
+  if (d === -2) return 'cháu họ (gọi bằng ông bà)';
+  return 'chắt họ'; }
+function inLawTerm(t, f){
+  const R = XR(), ho = / họ/.test(t) ? ' họ' : '';
+  if (/^(bố|ba)$/.test(t)) return f ? 'mẹ kế' : t; if (t === 'mẹ') return 'cha dượng';
+  if (/^anh/.test(t)) return 'chị dâu' + ho; if (/^chị/.test(t)) return 'anh rể' + ho; if (/^em/.test(t)) return (f ? 'em dâu' : 'em rể') + ho;
+  if (/^bác/.test(t)) return (f ? 'bác gái' : 'bác trai') + ho; if (/^chú/.test(t)) return 'thím' + ho;
+  if (/^cô/.test(t) || /^dì/.test(t)) return (R === 'nam' ? 'dượng' : 'chú') + ho; if (/^cậu/.test(t)) return 'mợ' + ho;
+  if (/^ông/.test(t)) return t.replace(/^ông/, 'bà'); if (/^bà/.test(t)) return t.replace(/^bà/, 'ông');
+  if (/^cụ ông/.test(t)) return t.replace('cụ ông', 'cụ bà'); if (/^cụ bà/.test(t)) return t.replace('cụ bà', 'cụ ông');
+  if (/^con/.test(t)) return f ? 'con dâu' : 'con rể'; if (/^cháu/.test(t)) return (f ? 'cháu dâu' : 'cháu rể') + ho;
+  if (/^chắt/.test(t)) return f ? 'chắt dâu' : 'chắt rể';
+  return (f ? 'vợ của ' : 'chồng của ') + t; }
+// Trả về A gọi B là gì, kèm đường nối
+function xungHo(a, b){
+  const A = P(a), B = P(b); if (!A || !B) return null;
+  if (a === b) return { t:'chính bạn', path:[a] };
+  if (spouses(A).some(x => x.id === b)) return { t: B.gioiTinh === 'nu' ? 'vợ' : 'chồng', path:[a, b] };
+  const pathOf = r => r.pa.concat(r.pb.slice(0, -1).reverse());
+  let r = bloodRel(a, b); if (r) return { t:bloodTerm(a, b, r), path:pathOf(r) };
+  for (const s of spouses(A)){ const r2 = bloodRel(s.id, b); if (r2) return { t:bloodTerm(s.id, b, r2), path:[a].concat(pathOf(r2)), theo:s }; }
+  for (const s of spouses(B)){ const r2 = bloodRel(a, s.id); if (r2) return { t:inLawTerm(bloodTerm(a, s.id, r2), B.gioiTinh === 'nu'), path:pathOf(r2).concat(b) }; }
+  for (const sa of spouses(A)) for (const sb of spouses(B)){ const r2 = bloodRel(sa.id, sb.id); if (r2) return { t:inLawTerm(bloodTerm(sa.id, sb.id, r2), B.gioiTinh === 'nu'), path:[a].concat(pathOf(r2), b), theo:sa }; }
+  return null; }
+const myId = () => { const v = store.get('gp_toi_' + (S.me && S.me.u)); return v && P(v) ? v : null; };
+function xhHTML(){
+  const b = S.xhFor, B = P(b), me = myId();
+  let h = `<h2>Gọi thế nào?</h2>`;
+  if (!me || S.xhPick){
+    return h + `<p class="sub">Bạn là ai trong gia phả? Chọn một lần, máy sẽ nhớ.</p>
+      <div class="srch"><input class="inp" id="xq" type="search" placeholder="Gõ tên của bạn" autocomplete="off"><button class="ib" data-act="close" aria-label="Đóng">${ic('x')}</button></div>
+      <div class="list" id="xqres"><p class="thint">Không cần gõ dấu.</p></div>`; }
+  const x = xungHo(me, b), y = xungHo(b, me), M = P(me);
+  if (me === b) h += `<div class="xhres"><b>Đây là bạn</b></div>`;
+  else if (!x) h += `<div class="xhres"><p>Chưa tìm được quan hệ giữa bạn và ${esc(B.hoTen)} trong gia phả.</p></div>`;
+  else h += `<div class="xhres"><p>Bạn gọi ${esc(B.hoTen)} là</p><b>${esc(x.t)}</b><p>${esc(B.hoTen)} gọi bạn là</p><b>${esc(y ? y.t : '…')}</b></div>
+    <p class="xhpath">${x.theo ? `Gọi theo ${esc(x.theo.hoTen)}. ` : ''}Đường nối: ${x.path.map(i => esc(P(i).hoTen)).join(' › ')}</p>`;
+  return h + `<div class="acts"><button class="btn" data-act="xhpick">Bạn không phải ${esc(M.hoTen)}?</button><button class="btn pri" data-act="close">Đóng</button></div>`; }
+
 /* Lịch sử dòng họ: ai cũng đọc được, chỉ quản trị sửa */
 function yearKey(x){ const m = String(x.thoiGian || '').match(/\d{3,4}/); return m ? +m[0] : 99999; }
 function paras(t){ return String(t || '').split(/\n\s*\n/).map(b => `<p>${esc(b).replace(/\n/g, '<br>')}</p>`).join(''); }
 function histHTML(){
   const H = S.hist || [], bai = H.filter(x => x.loai === 'bai').sort((a, b) => num(a.thuTu, 99) - num(b.thuTu, 99)), moc = H.filter(x => x.loai === 'moc').sort((a, b) => yearKey(a) - yearKey(b));
   const ed = x => isAdmin() ? `<div class="hedit"><button class="btn sm" data-act="hedit" data-id="${esc(x.id)}">${ic('edit', 16)}Sửa</button></div>` : '';
+  const que = H.filter(x => x.loai === 'que').sort((a, b) => num(a.thuTu, 99) - num(b.thuTu, 99));
   let h = `<div class="wrap gut">${banners()}<h1 class="ph1">Lịch sử dòng họ</h1>`;
+  if (que.length) h += `<div class="sec" style="margin-top:4px">Quê hương</div>` + que.map(q => { const map = /^https:\/\//.test(q.banDo) ? q.banDo : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q.tenMoi || q.tenCu || q.tieuDe);
+    return `<article class="art que"><h2>${esc(q.tieuDe)}</h2><dl class="ql">${q.tenCu ? `<dt>Tên cũ</dt><dd>${esc(q.tenCu)}</dd>` : ''}${q.tenMoi ? `<dt>Hiện nay</dt><dd>${esc(q.tenMoi)}</dd>` : ''}</dl>
+      ${paras(q.noiDung)}<div class="hedit"><a class="btn sm" href="${esc(map)}" target="_blank" rel="noopener">Mở bản đồ</a>${isAdmin() ? `<button class="btn sm" data-act="hedit" data-id="${esc(q.id)}">${ic('edit', 16)}Sửa</button>` : ''}</div></article>`; }).join('') + (bai.length ? `<div class="sec">Bài viết</div>` : '');
   if (!H.length) h += `<div class="empty">Chưa có bài viết nào.${isAdmin() ? ' Bấm nút bên dưới để viết phần nguồn gốc, nhà thờ họ, tộc ước.' : ' Người quản lý sẽ bổ sung sau.'}</div>`;
   bai.forEach(b => h += `<article class="art"><h2>${esc(b.tieuDe)}</h2>${paras(b.noiDung)}${ed(b)}</article>`);
   if (moc.length) h += `<div class="sec">Các mốc thời gian</div><ol class="tl2">${moc.map(x => `<li><span class="yr">${esc(x.thoiGian)}</span><div><b>${esc(x.tieuDe)}</b>${x.noiDung ? `<p>${esc(x.noiDung)}</p>` : ''}${ed(x)}</div></li>`).join('')}</ol>`;
-  if (isAdmin()) h += `<div class="acts" style="justify-content:flex-start;margin-top:14px"><button class="btn sm" data-act="hadd" data-l="bai">${ic('plus', 18)}Thêm bài</button><button class="btn sm" data-act="hadd" data-l="moc">${ic('plus', 18)}Thêm mốc thời gian</button></div>`;
+  if (isAdmin()) h += `<div class="acts" style="justify-content:flex-start;margin-top:14px"><button class="btn sm" data-act="hadd" data-l="bai">${ic('plus', 18)}Thêm bài</button><button class="btn sm" data-act="hadd" data-l="moc">${ic('plus', 18)}Thêm mốc thời gian</button><button class="btn sm" data-act="hadd" data-l="que">${ic('plus', 18)}Thêm quê hương</button></div>`;
   return h + `</div>`;
 }
 function histFormHTML(){
   const f = S.hform, x = f.item, bai = x.loai === 'bai';
+  if (x.loai === 'que') return `<form data-form="hist" novalidate><h2>${x.id ? 'Sửa' : 'Thêm'} quê hương</h2><p class="sub">Ghi cả tên cũ trong gia phả và tên hiện nay sau khi sắp xếp lại đơn vị hành chính.</p>${f.err ? `<div class="err">${esc(f.err)}</div>` : ''}
+    <label class="fld"><span>Tiêu đề</span><input class="inp" id="h_td" value="${esc(x.tieuDe)}" placeholder="Quê gốc, Nơi lập nghiệp"></label>
+    <label class="fld"><span>Tên cũ (như ghi trong gia phả)</span><input class="inp" id="h_cu" value="${esc(x.tenCu)}" placeholder="Làng…, tổng…, huyện…, tỉnh…"></label>
+    <label class="fld"><span>Tên hiện nay</span><input class="inp" id="h_moi" value="${esc(x.tenMoi)}" placeholder="Thôn…, xã…, tỉnh…"></label>
+    <label class="fld"><span>Link bản đồ (không bắt buộc)</span><input class="inp" id="h_bd" value="${esc(x.banDo)}" placeholder="https://maps.app.goo.gl/…" inputmode="url"></label>
+    <label class="fld"><span>Câu chuyện về làng (cách một dòng trống để sang đoạn mới)</span><textarea class="inp" id="h_nd" style="min-height:200px">${esc(x.noiDung)}</textarea></label>
+    <label class="fld"><span>Thứ tự hiện</span><input class="inp" id="h_tt" inputmode="numeric" value="${esc(x.thuTu)}" placeholder="1"></label>
+    <div class="acts">${x.id ? `<button type="button" class="btn dng" data-act="hdel" style="margin-right:auto">${f.confirmDel ? 'Bấm lần nữa để xóa' : 'Xóa'}</button>` : ''}<button type="button" class="btn" data-act="close">Hủy</button><button class="btn pri" type="submit">Lưu</button></div></form>`;
   return `<form data-form="hist" novalidate><h2>${x.id ? 'Sửa' : 'Thêm'} ${bai ? 'bài viết' : 'mốc thời gian'}</h2><p class="sub">${bai ? 'Ví dụ: Nguồn gốc dòng họ, Nhà thờ họ, Tộc ước.' : 'Ví dụ: 1925, Lập nhà thờ họ.'}</p>${f.err ? `<div class="err">${esc(f.err)}</div>` : ''}
     ${bai ? '' : `<label class="fld"><span>Thời gian</span><input class="inp" id="h_tg" value="${esc(x.thoiGian)}" placeholder="1925 hoặc khoảng 1880"></label>`}
     <label class="fld"><span>Tiêu đề</span><input class="inp" id="h_td" value="${esc(x.tieuDe)}"></label>
@@ -919,7 +1026,8 @@ function histFormHTML(){
     <div class="acts">${x.id ? `<button type="button" class="btn dng" data-act="hdel" style="margin-right:auto">${f.confirmDel ? 'Bấm lần nữa để xóa' : 'Xóa'}</button>` : ''}<button type="button" class="btn" data-act="close">Hủy</button><button class="btn pri" type="submit">Lưu</button></div></form>`;
 }
 function readHist(){ const v = id => { const el = $('#' + id); return el ? el.value.trim() : ''; }; const x = Object.assign({}, S.hform.item);
-  x.tieuDe = v('h_td'); x.noiDung = $('#h_nd') ? $('#h_nd').value.trim() : ''; if (x.loai === 'moc') x.thoiGian = v('h_tg'); else x.thuTu = v('h_tt'); return x; }
+  x.tieuDe = v('h_td'); x.noiDung = $('#h_nd') ? $('#h_nd').value.trim() : ''; if (x.loai === 'moc') x.thoiGian = v('h_tg'); else x.thuTu = v('h_tt');
+  if (x.loai === 'que'){ x.tenCu = v('h_cu'); x.tenMoi = v('h_moi'); x.banDo = v('h_bd'); } return x; }
 
 /* Công cụ quản trị: tệp GEDCOM, in phả đồ */
 function gedcom(){
@@ -984,6 +1092,8 @@ function adminHTML(){
     <button class="sw" role="switch" aria-checked="${S.entryMode}" aria-label="Giai đoạn nhập liệu" data-act="entry"></button></div>
     <div class="sec">Công cụ</div><div class="panel">
       <div class="urow"><span class="tx"><b style="font-weight:600">Bà con xem được sinh nhật</b><br><span class="thint">Hiện ngày, tháng sinh trong tab Lịch cho tài khoản chỉ xem.</span></span><button class="sw" role="switch" aria-checked="${!!S.opts.sinhNhat}" aria-label="Bà con xem được sinh nhật" data-act="optsn"></button></div>
+      <div class="urow"><span class="tx"><b style="font-weight:600">Ghi cháu ngoại trong cây</b><br><span class="thint">Tắt thì cây dừng ở người con gái, chỉ ghi số con bên ngoại.</span></span><button class="sw" role="switch" aria-checked="${S.opts.ngoaiTon !== false}" aria-label="Ghi cháu ngoại trong cây" data-act="optnt"></button></div>
+      <div class="urow"><span class="tx"><b style="font-weight:600">Cách xưng hô</b><br><span class="thint">Dùng cho nút "Gọi thế nào?" (bác, chú, cô, dì, dượng…).</span></span><span class="seg" role="group" aria-label="Cách xưng hô"><button data-act="optxh" data-v="bac" aria-pressed="${XR() === 'bac'}">Miền Bắc</button><button data-act="optxh" data-v="nam" aria-pressed="${XR() === 'nam'}">Miền Nam</button></span></div>
       <div class="urow"><span class="tx"><b style="font-weight:600">Sao lưu</b><br><span class="thint">${S.opts.autoBackup ? 'Tự động mỗi Chủ nhật. ' : 'Chưa bật tự động: chạy hàm caiDat trong Apps Script. '}Lần gần nhất: ${S.opts.lastBackup ? esc(fmtTime(S.opts.lastBackup)) : 'chưa có'}</span></span><button class="btn sm" data-act="backup">Sao lưu ngay</button></div>
       <div class="urow"><span class="tx"><b style="font-weight:600">Tải tệp GEDCOM</b><br><span class="thint">Sao lưu cả gia phả. Mở được bằng phần mềm gia phả khác.</span></span><button class="btn sm" data-act="gedcom">${ic('down', 16)}Tải về</button></div>
       <div class="urow"><span class="tx"><b style="font-weight:600">In phả đồ toàn họ</b><br><span class="thint">In hoặc lưu PDF khổ A3. Nên làm trên máy tính.</span></span><button class="btn sm" data-act="printtree">${ic('print', 16)}In</button></div>
@@ -1047,6 +1157,7 @@ function renderOverlay(){
     <div class="acts"><button type="button" class="btn" data-act="close">Hủy</button><button class="btn pri" type="submit">Lưu</button></div></form>`;
   else if (S.overlay === 'form') inner = formHTML();
   else if (S.overlay === 'hist') inner = histFormHTML();
+  else if (S.overlay === 'xh') inner = xhHTML();
   setTimeout(loadPhotos, 30);
   o.innerHTML = `<div class="ov" data-act="scrim"><div class="sheet${S.overlay === 'menu' ? ' menu' : ''}" role="dialog" aria-modal="true">${inner}</div></div>`;
   const f = o.querySelector('#q, #pw_o'); if (f) setTimeout(() => f.focus(), 30);
@@ -1198,7 +1309,13 @@ document.addEventListener('click', async e => {
     case 'calmore': S.calRange = Math.min(12, S.calRange + 3); render(true); break;
     case 'calnav': S.calM += +t.dataset.z; if (S.calM < 1){ S.calM = 12; S.calY--; } if (S.calM > 12){ S.calM = 1; S.calY++; } S.calSel = null; render(true); break;
     case 'calday': { const d = +t.dataset.d; S.calSel = S.calSel === d ? null : d; render(true); break; }
-    case 'hadd': S.hform = { item:{ id:'', loai:t.dataset.l, thoiGian:'', tieuDe:'', noiDung:'', thuTu:'' }, err:'', confirmDel:false }; S.overlay = 'hist'; renderOverlay(); break;
+    case 'xh': S.xhFor = id; S.xhPick = false; S.overlay = 'xh'; renderOverlay(); { const q = $('#xq'); if (q) setTimeout(() => q.focus(), 30); } break;
+    case 'xhpick': S.xhPick = true; renderOverlay(); setTimeout(() => { const q = $('#xq'); if (q) q.focus(); }, 30); break;
+    case 'xhme': store.set('gp_toi_' + S.me.u, id); S.xhPick = false; renderOverlay(); break;
+    case 'optnt': try { const r = await api('setOption', { key:'ngoaiTon', on: S.opts.ngoaiTon === false }); S.opts = r.options; render(true); toast(S.opts.ngoaiTon ? 'Cây ghi cả cháu ngoại' : 'Cây dừng ở người con gái'); } catch(er){ toast(er.message); } break;
+    case 'optxh': try { const r = await api('setOption', { key:'xungHo', value: t.dataset.v }); S.opts = r.options; render(true); toast('Đã chọn cách gọi miền ' + (XR() === 'nam' ? 'Nam' : 'Bắc')); } catch(er){ toast(er.message); } break;
+    case 'hadd': if (t.dataset.l === 'que' && !DEMO && S.serverVersion !== NEED_SERVER){ toast('Cần cập nhật Apps Script bản mới trước'); break; }
+      S.hform = { item:{ id:'', loai:t.dataset.l, thoiGian:'', tieuDe:'', noiDung:'', thuTu:'', tenCu:'', tenMoi:'', banDo:'' }, err:'', confirmDel:false }; S.overlay = 'hist'; renderOverlay(); break;
     case 'hedit': { const x = S.hist.find(h => h.id === id); if (!x) break; S.hform = { item:Object.assign({}, x), err:'', confirmDel:false }; S.overlay = 'hist'; renderOverlay(); break; }
     case 'hdel': if (!S.hform.confirmDel){ S.hform.item = readHist(); S.hform.confirmDel = true; renderOverlay(); break; }
       try { await api('delHist', { id:S.hform.item.id }); S.hist = S.hist.filter(h => h.id !== S.hform.item.id); S.overlay = null; S.hform = null; renderOverlay(); render(true); toast('Đã xóa'); }
@@ -1217,7 +1334,12 @@ document.addEventListener('click', async e => {
     case 'resetdemo': DB = demoSeed(); demoSave(); S.users = null; S.logs = null; S.photos = {}; S.asked = {}; S.focus = 'p5'; await loadData(); toast('Đã khôi phục dữ liệu mẫu'); break;
   }
 });
-document.addEventListener('input', e => { if (e.target.id === 'q'){ $('#qres').innerHTML = searchRes(e.target.value); setTimeout(loadPhotos, 30); } });
+document.addEventListener('input', e => {
+  if (e.target.id === 'xq'){ const k = fold(e.target.value).trim(), r = $('#xqres'); if (!r) return;
+    const ppl = k ? S.list.filter(p => fold(p.hoTen).includes(k)).slice(0, 30) : [];
+    r.innerHTML = !k ? '<p class="thint">Không cần gõ dấu.</p>' : ppl.length ? ppl.map(p => `<button class="row" data-act="xhme" data-id="${p.id}">${av(p, 44)}<span class="tx"><span class="nm">${esc(p.hoTen)}</span><br><span class="sb">${subLine(p, 'Đời ' + p._doi)}</span></span></button>`).join('') : '<p class="thint">Không thấy ai có tên như vậy.</p>';
+    setTimeout(loadPhotos, 30); return; }
+  if (e.target.id === 'q'){ $('#qres').innerHTML = searchRes(e.target.value); setTimeout(loadPhotos, 30); } });
 document.addEventListener('change', async e => {
   const t = e.target;
   if (t.name === 'cs'){ const box = $('#deadF'); if (box) box.hidden = t.value === '1'; }
