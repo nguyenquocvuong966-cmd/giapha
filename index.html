@@ -328,6 +328,7 @@ textarea.inp{height:auto;min-height:72px;padding:10px 12px}
 const CONFIG = { API_URL: 'https://script.google.com/macros/s/AKfycbwKWNfHVk_fH6wH44f3O-ZhwfhQ17-jSDgwqGB54-So75Hv4UuFHjZuwotfa9M3DJb3uw/exec', TEN: 'Gia phả họ Nguyễn' };
 
 const DEMO = !CONFIG.API_URL;
+const NEED_SERVER = '4';
 const NOW = new Date();
 const NOW_Y = NOW.getFullYear();
 const S = { token:null, me:null, people:{}, list:[], kids:{}, chis:[], entryMode:true, title:CONFIG.TEN, calView:'list', calY:NOW.getFullYear(), calM:NOW.getMonth() + 1, calSel:null, calRange:3, hist:[], opts:{ sinhNhat:false }, hform:null,
@@ -519,7 +520,7 @@ async function api(action, payload = {}){
 }
 
 /* ---------- dữ liệu chạy thử ---------- */
-const DEMO_KEY = 'gp_demo_v2';
+const DEMO_KEY = 'gp_demo_v3';
 function demoSeed(){
   const L = [];
   const mk = (id, hoTen, gt, doi, chi, ns, nm, o = {}) => L.push(Object.assign({ id, hoTen, gioiTinh:gt, chaId:'', meId:'', voChong:'', doi:String(doi), chi,
@@ -586,31 +587,43 @@ async function demoApi(a, y){
     u.sai = 0; demoSave(); return { token:'demo.' + u.tenDangNhap, me:{ u:u.tenDangNhap, hoTen:u.hoTen, vaiTro:u.vaiTro, chi:u.chi } }; }
   const nd = db.users.find(x => 'demo.' + x.tenDangNhap === S.token);
   if (!nd || nd.khoa){ logout(true); throw new Error('Phiên đăng nhập đã hết. Hãy đăng nhập lại.'); }
+  // Chi tự tính, giống máy chủ
+  const byId = {}; db.people.forEach(x => byId[x.id] = x);
+  const goc = r => { if (r.ngoaiToc) return String(r.voChong || '').split(',').map(i => byId[i]).find(x => x && !x.ngoaiToc) || null;
+    const c = byId[r.chaId], m = byId[r.meId]; if (c && !c.ngoaiToc) return c; if (m && !m.ngoaiToc) return m; return c || m || null; };
+  const hl = (rieng, r, tren) => tren == null ? rieng : r.ngoaiToc ? tren : tren === '' ? rieng : (rieng && rieng !== tren && rieng.indexOf(tren + ' ') === 0 ? rieng : tren);
+  const memo = {}; const effChi = (r, g = 0) => { if (memo[r.id] != null) return memo[r.id]; memo[r.id] = r.chi || ''; if (g > 80) return memo[r.id]; const o = goc(r); return memo[r.id] = hl(r.chi || '', r, o ? effChi(o, g + 1) : null); };
   const can = chi => nd.vaiTro === 'admin' || (nd.vaiTro === 'bientap' && db.entryMode && String(chi || '') === String(nd.chi || ''));
   const seePriv = chi => nd.vaiTro === 'admin' || (nd.vaiTro === 'bientap' && String(chi || '') === String(nd.chi || ''));
-  const clone = p => { const o = JSON.parse(JSON.stringify(p)); if (o.conSong && !seePriv(o.chi)){ const m = String(o.ngaySinh || '').match(/^\s*(\d{1,2})\s*[\/\-.]\s*(\d{1,2})/); o.dienThoai = ''; o.diaChi = ''; o.ngaySinh = ''; if (db.opts.sinhNhat && m) o.sinhNhat = m[1] + '/' + m[2]; } if (nd.vaiTro === 'xem') o.nguon = ''; return o; };
+  const clone = p => { const o = JSON.parse(JSON.stringify(p)); o.chi = effChi(p); if (o.conSong && !seePriv(o.chi)){ const m = String(o.ngaySinh || '').match(/^\s*(\d{1,2})\s*[\/\-.]\s*(\d{1,2})/); o.dienThoai = ''; o.diaChi = ''; o.ngaySinh = ''; if (db.opts.sinhNhat && m) o.sinhNhat = m[1] + '/' + m[2]; } if (nd.vaiTro === 'xem') o.nguon = ''; return o; };
   switch (a){
-    case 'data': return { people: db.people.map(clone), me:{ u:nd.tenDangNhap, hoTen:nd.hoTen, vaiTro:nd.vaiTro, chi:nd.chi }, entryMode: db.entryMode, title: CONFIG.TEN, history: db.history, options:{ sinhNhat: !!db.opts.sinhNhat } };
+    case 'data': return { people: db.people.map(clone), me:{ u:nd.tenDangNhap, hoTen:nd.hoTen, vaiTro:nd.vaiTro, chi:nd.chi }, entryMode: db.entryMode, title: CONFIG.TEN, history: db.history, options: Object.assign({ sinhNhat: !!db.opts.sinhNhat }, nd.vaiTro === 'admin' ? { autoBackup:true, lastBackup: db.lastBackup || '' } : {}), serverVersion:'4' };
     case 'save': { const p = y.person; const cu = p.id ? db.people.find(x => x.id === p.id) : null;
       if (!String(p.hoTen || '').trim()) throw new Error('Chưa nhập họ tên');
-      if (cu && !can(cu.chi)) throw new Error('Bạn không có quyền sửa người này');
-      const chi = nd.vaiTro === 'admin' ? (p.chi || '') : (cu ? cu.chi : nd.chi);
+      if (cu && p.capNhatLuc != null && String(cu.capNhatLuc || '') !== String(p.capNhatLuc || '')) throw new Error('Hồ sơ này vừa được người khác sửa. Đóng lại, mở lại hồ sơ để xem bản mới rồi sửa tiếp.');
+      if (cu && !can(effChi(cu))) throw new Error('Bạn không có quyền sửa người này');
+      const o2 = goc(p), tren = o2 ? effChi(o2) : null;
+      const rieng = nd.vaiTro === 'admin' ? (p.chi || '') : (cu ? cu.chi || '' : (tren != null ? tren : nd.chi));
+      const chi = hl(rieng, p, tren);
       if (!can(chi)) throw new Error('Bạn chỉ được nhập người thuộc ' + (nd.chi || 'chi của mình'));
       const moi = cu || { id:'P' + Date.now().toString(36), anhId:'' };
-      Object.assign(moi, p, { id:moi.id, chi, anhId:moi.anhId, hoTen:String(p.hoTen).trim() });
+      const truoc = cu ? JSON.parse(JSON.stringify(cu)) : null;
+      Object.assign(moi, p, { id:moi.id, chi, anhId:moi.anhId, hoTen:String(p.hoTen).trim(), capNhatLuc:new Date().toISOString() });
       if (!cu) db.people.push(moi);
       String(moi.voChong || '').split(',').filter(Boolean).forEach(sid => { const s = db.people.find(x => x.id === sid);
         if (s){ const l = String(s.voChong || '').split(',').filter(Boolean); if (!l.includes(moi.id)){ l.push(moi.id); s.voChong = l.join(','); } } });
-      demoLog(nd.tenDangNhap, cu ? 'sua' : 'them', moi.id, moi.hoTen, ''); demoSave(); return { person: clone(moi) }; }
+      const doi = {}; if (truoc) Object.keys(FL).forEach(k => { const a2 = String(truoc[k] == null ? '' : truoc[k]), b2 = String(moi[k] == null ? '' : moi[k]); if (a2 !== b2) doi[k] = [a2 === 'true' ? 'TRUE' : a2 === 'false' ? 'FALSE' : a2, b2 === 'true' ? 'TRUE' : b2 === 'false' ? 'FALSE' : b2]; });
+      demoLog(nd.tenDangNhap, cu ? 'sua' : 'them', moi.id, moi.hoTen, cu ? JSON.stringify(doi) : ''); demoSave(); Object.keys(memo).forEach(k => delete memo[k]); return { person: clone(moi) }; }
     case 'delete': { if (nd.vaiTro !== 'admin') throw new Error('Chỉ người quản trị được xóa');
       if (db.people.some(x => x.chaId === y.id || x.meId === y.id)) throw new Error('Người này còn con trong gia phả. Hãy xóa hoặc chuyển các con trước.');
       const p = db.people.find(x => x.id === y.id);
       db.people.forEach(x => { const l = String(x.voChong || '').split(',').filter(Boolean); if (l.includes(y.id)) x.voChong = l.filter(i => i !== y.id).join(','); });
-      db.people = db.people.filter(x => x.id !== y.id); demoLog(nd.tenDangNhap, 'xoa', y.id, p && p.hoTen, ''); demoSave(); return { deleted: y.id }; }
+      db.people = db.people.filter(x => x.id !== y.id); demoLog(nd.tenDangNhap, 'xoa', y.id, p && p.hoTen, JSON.stringify(p)); demoSave(); return { deleted: y.id }; }
     case 'uploadPhoto': { const p = db.people.find(x => x.id === y.id); if (!p) throw new Error('Không tìm thấy người');
       if (!can(p.chi)) throw new Error('Bạn không có quyền sửa ảnh người này');
       if (p.anhId) delete db.photos[p.anhId]; p.anhId = 'demo-' + Date.now().toString(36); db.photos[p.anhId] = y.data;
-      demoLog(nd.tenDangNhap, 'anh', p.id, p.hoTen, 'Cập nhật ảnh'); demoSave(); return { anhId: p.anhId }; }
+      p.capNhatLuc = new Date().toISOString(); demoLog(nd.tenDangNhap, 'anh', p.id, p.hoTen, 'Cập nhật ảnh'); demoSave(); return { anhId: p.anhId, capNhatLuc: p.capNhatLuc }; }
+    case 'logError': return { logged:false };
     case 'photo': { const o = {}; (y.ids || []).forEach(i => o[i] = db.photos[i] || ''); return { photos:o }; }
     case 'changePassword': if (nd.pw !== y.old) throw new Error('Mật khẩu cũ không đúng'); if (String(y.new).length < 6) throw new Error('Mật khẩu mới tối thiểu 6 ký tự');
       nd.pw = y.new; demoSave(); return { token:S.token };
@@ -619,6 +632,12 @@ async function demoApi(a, y){
   const pub = () => db.users.map(u => ({ tenDangNhap:u.tenDangNhap, hoTen:u.hoTen, vaiTro:u.vaiTro, chi:u.chi, khoa:!!u.khoa, khoaTam:false }));
   switch (a){
     case 'users': return { users: pub() };
+    case 'backup': db.lastBackup = new Date().toISOString(); demoLog(nd.tenDangNhap, 'sao_luu', '', '', 'Sao lưu (bản thử)'); demoSave(); return { lastBackup: db.lastBackup };
+    case 'restoreDeleted': { const l = db.logs.find(x => x.hd === 'xoa' && x.id === y.id && x.t === y.t); if (!l) throw new Error('Không tìm thấy lần xóa này trong nhật ký');
+      if (db.people.some(x => x.id === y.id)) throw new Error('Người này đang có trong gia phả');
+      const p = JSON.parse(l.ct); p.voChong = String(p.voChong || '').split(',').filter(i => db.people.some(x => x.id === i)).join(','); db.people.push(p);
+      p.voChong.split(',').filter(Boolean).forEach(i => { const s2 = db.people.find(x => x.id === i); const l2 = String(s2.voChong || '').split(',').filter(Boolean); if (!l2.includes(p.id)){ l2.push(p.id); s2.voChong = l2.join(','); } });
+      demoLog(nd.tenDangNhap, 'khoi_phuc', p.id, p.hoTen, 'Khôi phục người đã xóa'); demoSave(); return { restored:p.id }; }
     case 'saveHist': { const x = Object.assign({}, y.item); if (!String(x.tieuDe || '').trim()) throw new Error('Chưa nhập tiêu đề');
       if (!x.id) x.id = 'H' + Date.now().toString(36); db.history = db.history.filter(h => h.id !== x.id).concat([x]); demoLog(nd.tenDangNhap, 'lich_su', '', x.tieuDe); demoSave(); return { item:x }; }
     case 'delHist': db.history = db.history.filter(h => h.id !== y.id); demoSave(); return { deleted:y.id };
@@ -643,7 +662,7 @@ async function demoApi(a, y){
 function logout(silent){ S.token = null; S.me = null; S.users = null; S.logs = null; store.del('gp_token'); store.del('gp_data');
   S.overlay = null; S.form = null; renderOverlay(); render(); if (!silent) toast('Đã đăng xuất'); }
 function applyData(d){
-  S.me = d.me; S.entryMode = d.entryMode; S.title = d.title || CONFIG.TEN; S.hist = d.history || []; S.opts = d.options || { sinhNhat:false }; reindex(d.people || []);
+  S.me = d.me; S.entryMode = d.entryMode; S.title = d.title || CONFIG.TEN; S.hist = d.history || []; S.opts = d.options || { sinhNhat:false }; S.serverVersion = d.serverVersion || ''; reindex(d.people || []);
   if (!S.focus || !P(S.focus)){ const saved = store.get('gp_focus'); S.focus = saved && P(saved) ? saved : defaultFocus(); }
 }
 function defaultFocus(){ if (DEMO && P('p5')) return 'p5'; const r = S.list.find(p => !p.ngoaiToc && !clanParent(p)); return r ? r.id : (S.list[0] && S.list[0].id); }
@@ -699,6 +718,7 @@ function viewHTML(){
 function banners(){
   let b = '';
   if (DEMO) b += `<div class="banner">Bản chạy thử với dữ liệu mẫu. Mọi thay đổi chỉ lưu trong máy này.</div>`;
+  if (isAdmin() && S.serverVersion !== NEED_SERVER) b += `<div class="banner">Apps Script đang chạy bản cũ. Dán Code.gs mới, chạy caiDat, rồi triển khai Phiên bản mới.</div>`;
   if (S.offline) b += `<div class="banner">Không có mạng. Đang xem bản đã lưu trong máy.</div>`;
   if (S.me.vaiTro === 'bientap') b += S.entryMode ? `<div class="banner" style="background:var(--ok-bg);color:var(--ok-fg)">Bạn đang nhập liệu cho ${esc(chiName(S.me.chi))}.</div>` : `<div class="banner">Giai đoạn nhập liệu đã đóng. Bạn chỉ xem được.</div>`;
   return b;
@@ -932,7 +952,22 @@ function saveFile(name, text){
 /* Quản trị */
 async function loadAdmin(){ try { const [u, l] = await Promise.all([api('users'), api('logs')]); S.users = u.users; S.logs = l.logs; } catch(e){ S.users = []; S.logs = []; toast(e.message); } if (S.view === 'admin') render(true); }
 const ROLE = { admin:'Quản trị', bientap:'Được sửa', xem:'Chỉ xem' };
-const HD = { them:'Thêm', sua:'Sửa', xoa:'Xóa', anh:'Đổi ảnh', mo_nhap_lieu:'Mở nhập liệu', dong_nhap_lieu:'Đóng nhập liệu', tao_tai_khoan:'Tạo tài khoản', sua_tai_khoan:'Sửa tài khoản', khoa_tam:'Khóa tạm', doi_mat_khau:'Đổi mật khẩu', dang_nhap:'Đăng nhập', lich_su:'Sửa lịch sử họ', tuy_chon:'Đổi tùy chọn' };
+const FL = { hoTen:'Họ tên', gioiTinh:'Giới tính', chaId:'Cha', meId:'Mẹ', voChong:'Vợ/chồng', chi:'Chi', ngoaiToc:'Dâu/rể', namSinh:'Năm sinh', ngaySinh:'Ngày sinh',
+  conSong:'Còn sống', namMat:'Năm mất', ngayGio:'Ngày giỗ', anTang:'An táng', dienThoai:'Điện thoại', diaChi:'Địa chỉ', ghiChu:'Ghi chú', thuTu:'Con thứ', tenHuy:'Tên húy', nguon:'Nguồn' };
+function fv(k, v){ if (v === '' || v == null) return '(trống)'; if (v === 'TRUE') return 'Có'; if (v === 'FALSE') return 'Không';
+  if (k === 'gioiTinh') return v === 'nu' ? 'Nữ' : 'Nam';
+  if (k === 'chaId' || k === 'meId' || k === 'voChong') return String(v).split(',').map(i => P(i) ? P(i).hoTen : '(người đã xóa)').join(', ');
+  return String(v).length > 40 ? String(v).slice(0, 40) + '…' : v; }
+function parseCt(l){ if (!l.ct || l.ct[0] !== '{') return null; try { return JSON.parse(l.ct); } catch(e){ return null; } }
+function logHTML(l, i){
+  const ct = parseCt(l); let body = '', act = '';
+  if (ct && l.hd === 'sua'){ const ks = Object.keys(ct).filter(k => k !== 'doi' && FL[k]);
+    body = ks.slice(0, 4).map(k => `<div class="thint">${FL[k]}: ${esc(fv(k, ct[k][0]))} → ${esc(fv(k, ct[k][1]))}</div>`).join('') + (ks.length > 4 ? `<div class="thint">… và ${ks.length - 4} mục khác</div>` : '');
+    if (ks.length && P(l.id)) act = `<button class="btn sm" data-act="undo" data-i="${i}">${S.undoArm === i ? 'Bấm lần nữa để hoàn tác' : 'Hoàn tác'}</button>`; }
+  else if (ct && l.hd === 'xoa'){ if (!P(l.id)) act = `<button class="btn sm" data-act="undo" data-i="${i}">${S.undoArm === i ? 'Bấm lần nữa để khôi phục' : 'Khôi phục'}</button>`; }
+  else if (l.ct && !ct) body = `<div class="thint">${esc(l.ct)}</div>`;
+  return `<div class="log"><b style="font-weight:500">${esc(l.ai)}</b> · ${esc(HD[l.hd] || l.hd)} ${esc(l.ten || '')}${body}<small>${esc(fmtTime(l.t))}</small>${act ? `<div class="hedit">${act}</div>` : ''}</div>`; }
+const HD = { khoi_phuc:'Khôi phục', sao_luu:'Sao lưu', loi:'Lỗi trên máy', them:'Thêm', sua:'Sửa', xoa:'Xóa', anh:'Đổi ảnh', mo_nhap_lieu:'Mở nhập liệu', dong_nhap_lieu:'Đóng nhập liệu', tao_tai_khoan:'Tạo tài khoản', sua_tai_khoan:'Sửa tài khoản', khoa_tam:'Khóa tạm', doi_mat_khau:'Đổi mật khẩu', dang_nhap:'Đăng nhập', lich_su:'Sửa lịch sử họ', tuy_chon:'Đổi tùy chọn' };
 function adminHTML(){
   if (!isAdmin()) return `<div class="wrap gut"><div class="empty">Chỉ người quản trị xem được trang này.</div></div>`;
   const all = S.list, inClan = all.filter(p => !p.ngoaiToc), alive = all.filter(p => p.conSong).length;
@@ -949,6 +984,7 @@ function adminHTML(){
     <button class="sw" role="switch" aria-checked="${S.entryMode}" aria-label="Giai đoạn nhập liệu" data-act="entry"></button></div>
     <div class="sec">Công cụ</div><div class="panel">
       <div class="urow"><span class="tx"><b style="font-weight:600">Bà con xem được sinh nhật</b><br><span class="thint">Hiện ngày, tháng sinh trong tab Lịch cho tài khoản chỉ xem.</span></span><button class="sw" role="switch" aria-checked="${!!S.opts.sinhNhat}" aria-label="Bà con xem được sinh nhật" data-act="optsn"></button></div>
+      <div class="urow"><span class="tx"><b style="font-weight:600">Sao lưu</b><br><span class="thint">${S.opts.autoBackup ? 'Tự động mỗi Chủ nhật. ' : 'Chưa bật tự động: chạy hàm caiDat trong Apps Script. '}Lần gần nhất: ${S.opts.lastBackup ? esc(fmtTime(S.opts.lastBackup)) : 'chưa có'}</span></span><button class="btn sm" data-act="backup">Sao lưu ngay</button></div>
       <div class="urow"><span class="tx"><b style="font-weight:600">Tải tệp GEDCOM</b><br><span class="thint">Sao lưu cả gia phả. Mở được bằng phần mềm gia phả khác.</span></span><button class="btn sm" data-act="gedcom">${ic('down', 16)}Tải về</button></div>
       <div class="urow"><span class="tx"><b style="font-weight:600">In phả đồ toàn họ</b><br><span class="thint">In hoặc lưu PDF khổ A3. Nên làm trên máy tính.</span></span><button class="btn sm" data-act="printtree">${ic('print', 16)}In</button></div>
     </div>
@@ -969,9 +1005,9 @@ function adminHTML(){
     <label class="fld"><span>Tên hiển thị</span><input class="inp" id="nu_n" placeholder="Anh Tuấn"></label></div>
     <div class="two"><label class="fld"><span>Chi</span><select class="inp" id="nu_c"><option value="">Dòng chính</option>${S.chis.map(c => `<option>${esc(c)}</option>`).join('')}</select></label>
     <label class="fld"><span>Quyền</span><select class="inp" id="nu_r"><option value="xem">Chỉ xem</option><option value="bientap">Được sửa</option><option value="admin">Quản trị</option></select></label></div>
-    <label class="fld"><span>Mật khẩu ban đầu (hoặc mã PIN 6 số)</span><input class="inp" id="nu_p" autocomplete="off" placeholder="123456"></label>
+    <label class="fld"><span>Mật khẩu ban đầu (hoặc mã PIN 6 số)</span><input class="inp" id="nu_p" autocomplete="off" placeholder="6 số, không dùng 123456, 111111"></label>
     <div class="acts"><button class="btn pri" type="submit">${ic('plus', 18)}Tạo tài khoản</button></div></form>
-    <div class="sec">Nhật ký sửa</div><div class="panel">${S.logs === null ? '<p class="thint">Đang tải…</p>' : S.logs.length ? S.logs.slice(0, 60).map(l => `<div class="log"><b style="font-weight:500">${esc(l.ai)}</b> · ${esc(HD[l.hd] || l.hd)} ${esc(l.ten || '')}${l.ct ? ` <span class="thint">(${esc(l.ct)})</span>` : ''}<small>${esc(fmtTime(l.t))}</small></div>`).join('') : '<p class="thint">Chưa có thay đổi nào.</p>'}</div>
+    <div class="sec">Nhật ký sửa</div><div class="panel">${S.logs === null ? '<p class="thint">Đang tải…</p>' : S.logs.length ? S.logs.slice(0, 60).map(logHTML).join('') : '<p class="thint">Chưa có thay đổi nào.</p>'}</div>
     ${DEMO ? `<div class="sec">Bản chạy thử</div><button class="btn" data-act="resetdemo">Khôi phục dữ liệu mẫu</button>` : ''}</div>`;
   return h;
 }
@@ -1028,7 +1064,7 @@ function searchRes(q){
 function openForm(mode, rel, id){
   const base = P(id);
   let d;
-  if (mode === 'edit') d = Object.assign({}, base);
+  if (mode === 'edit') d = Object.assign({ capNhatLuc:'' }, base);
   else {
     d = { hoTen:'', gioiTinh:'nam', chaId:'', meId:'', voChong:'', doi:'', chi:base ? base.chi : '', ngoaiToc:false, namSinh:'', ngaySinh:'', conSong:true, namMat:'', ngayGio:'', anTang:'', dienThoai:'', diaChi:'', ghiChu:'', thuTu:'', tenHuy:'', nguon:'' };
     if (rel === 'con'){ const sp = spouses(base)[0]; if (base.gioiTinh === 'nu'){ d.meId = base.id; d.chaId = sp ? sp.id : ''; } else { d.chaId = base.id; d.meId = sp ? sp.id : ''; }
@@ -1046,6 +1082,8 @@ function formHTML(){
   const title = mode === 'edit' ? 'Sửa thông tin' : { con:'Thêm con', vo: base && base.gioiTinh === 'nu' ? 'Thêm chồng' : 'Thêm vợ', anhem:'Thêm anh chị em', cha:'Thêm cha', root:'Nhập thủy tổ' }[rel];
   const sub = mode === 'edit' ? esc(d.hoTen) : rel === 'con' ? `Con của ${esc(base.hoTen)} · Đời ${esc(d.doi)}` : rel === 'vo' ? `Của ${esc(base.hoTen)} · Đời ${esc(d.doi)}` : rel === 'anhem' ? `Anh chị em của ${esc(base.hoTen)}` : rel === 'cha' ? `Cha của ${esc(base.hoTen)}` : 'Người đứng đầu gia phả';
   const cur = S.form.photo || (d.anhId && S.photos[d.anhId]);
+  const tren = rel === 'con' ? base : rel === 'anhem' ? clanParent(base) : (rel === 'root' || rel === 'cha') ? null : rel === 'vo' ? false : clanParent(d);
+  const showChi = tren !== false && !d.ngoaiToc && (!tren || !tren.chi);
   const radio = (name, val, label, on) => `<label class="chip"><input type="radio" name="${name}" value="${val}"${on ? ' checked' : ''}><span>${label}</span></label>`;
   let mother = '';
   if (rel === 'con' && base){ const sps = spouses(base); if (sps.length > 1){ const k = base.gioiTinh === 'nu' ? 'chaId' : 'meId';
@@ -1072,7 +1110,7 @@ function formHTML(){
       <label class="fld"><span>Địa chỉ</span><input class="inp" id="f_diaChi" value="${esc(d.diaChi)}"></label>
       <label class="fld"><span>Ghi chú, tiểu sử ngắn</span><textarea class="inp" id="f_ghiChu">${esc(d.ghiChu)}</textarea></label>
       <label class="fld"><span>Nguồn thông tin (bà con không thấy mục này)</span><input class="inp" id="f_nguon" value="${esc(d.nguon)}" placeholder="Gia phả giấy chi 2, lời ông Khoa kể"></label>
-      ${isAdmin() ? `<label class="fld"><span>Chi</span><input class="inp" id="f_chi" value="${esc(d.chi)}" list="chis" placeholder="Chi 1"><datalist id="chis">${S.chis.map(c => `<option value="${esc(c)}">`).join('')}</datalist></label>
+      ${isAdmin() ? `${showChi ? `<label class="fld"><span>Tên chi (con cháu tự theo)</span><input class="inp" id="f_chi" value="${esc(d.chi)}" list="chis" placeholder="Chi 1"><datalist id="chis">${S.chis.map(c => `<option value="${esc(c)}">`).join('')}</datalist></label>` : ''}
         <div class="fld"><span>Là dâu hoặc rể (người ngoài họ)</span><div class="chips">${radio('nt', '0', 'Không', !d.ngoaiToc)}${radio('nt', '1', 'Có', d.ngoaiToc)}</div></div>` : ''}
     </details>
     <div class="acts">${mode === 'edit' && isAdmin() ? `<button type="button" class="btn dng" data-act="delp" style="margin-right:auto">${S.form.confirmDel ? 'Bấm lần nữa để xóa' : 'Xóa'}</button>` : ''}
@@ -1111,13 +1149,13 @@ async function submitPerson(){
     let arr = S.list.filter(x => x.id !== p.id).concat([Object.assign({}, P(p.id) || {}, p)]);
     if (p.voChong) p.voChong.split(',').forEach(sid => { const s = arr.find(x => x.id === sid); if (s){ const l = String(s.voChong || '').split(',').filter(Boolean); if (!l.includes(p.id)){ l.push(p.id); arr = arr.map(x => x.id === sid ? Object.assign({}, x, { voChong:l.join(',') }) : x); } } });
     reindex(arr);
-    if (S.form.photo){ const ph = await api('uploadPhoto', { id:p.id, data:S.form.photo }); S.photos[ph.anhId] = S.form.photo; IDB.set(ph.anhId, S.form.photo); P(p.id).anhId = ph.anhId; }
+    if (S.form.photo){ const ph = await api('uploadPhoto', { id:p.id, data:S.form.photo }); S.photos[ph.anhId] = S.form.photo; IDB.set(ph.anhId, S.form.photo); P(p.id).anhId = ph.anhId; if (ph.capNhatLuc) P(p.id).capNhatLuc = ph.capNhatLuc; }
     if (S.form.rel === 'cha'){ const child = Object.assign({}, P(S.form.of)); child[p.gioiTinh === 'nu' ? 'meId' : 'chaId'] = p.id;
       const r2 = await api('save', { person: child }); reindex(S.list.map(x => x.id === child.id ? Object.assign({}, x, r2.person) : x)); }
     if (S.form.rel === 'root') S.focus = p.id;
     const name = p.hoTen; S.overlay = null; S.form = null; renderOverlay(); render(true);
     toast(isNew ? 'Đã thêm ' + name : 'Đã lưu');
-  } catch(e){ S.form.err = e.message; renderOverlay(); }
+  } catch(e){ S.form.err = e.message; renderOverlay(); if (/người khác sửa/.test(e.message)) loadData(); }
 }
 
 /* ---------- sự kiện ---------- */
@@ -1168,6 +1206,14 @@ document.addEventListener('click', async e => {
     case 'optsn': try { const r = await api('setOption', { key:'sinhNhat', on: !S.opts.sinhNhat }); S.opts = r.options; render(true); toast(S.opts.sinhNhat ? 'Bà con sẽ thấy sinh nhật trong tab Lịch' : 'Đã ẩn sinh nhật với bà con'); } catch(er){ toast(er.message); } break;
     case 'gedcom': saveFile('gia-pha-' + new Date().toISOString().slice(0, 10) + '.ged', gedcom()); break;
     case 'printtree': S.view = 'tree'; S.treeMode = 'toan'; S.zoomUser = true; S.zoom = 0.7; render(); setTimeout(() => { try { window.print(); } catch(er){} }, 500); break;
+    case 'backup': t.disabled = true; t.textContent = 'Đang sao lưu…';
+      try { const r = await api('backup'); S.opts.lastBackup = r.lastBackup; S.logs = null; loadAdmin(); toast('Đã sao lưu'); } catch(er){ toast(er.message); render(true); } break;
+    case 'undo': { const i = +t.dataset.i, l = S.logs[i]; if (S.undoArm !== i){ S.undoArm = i; render(true); break; } S.undoArm = null;
+      try {
+        if (l.hd === 'xoa') await api('restoreDeleted', { id:l.id, t:l.t });
+        else { const ct = parseCt(l), p = Object.assign({}, P(l.id)); Object.keys(ct).forEach(k => { const v = ct[k][0]; p[k] = (k === 'conSong' || k === 'ngoaiToc') ? v === 'TRUE' : v; }); await api('save', { person:p }); }
+        S.logs = null; await loadData(); loadAdmin(); toast(l.hd === 'xoa' ? 'Đã khôi phục ' + l.ten : 'Đã hoàn tác');
+      } catch(er){ toast(er.message); render(true); } break; }
     case 'resetdemo': DB = demoSeed(); demoSave(); S.users = null; S.logs = null; S.photos = {}; S.asked = {}; S.focus = 'p5'; await loadData(); toast('Đã khôi phục dữ liệu mẫu'); break;
   }
 });
@@ -1215,6 +1261,12 @@ document.addEventListener('submit', async e => {
   if (!DEMO){ const cached = store.get('gp_data'); if (cached){ applyData(cached); render(); } }
   await loadData();
 })();
+// Lỗi xảy ra trên máy bà con được ghi về Nhật ký (tối đa 5 lần mỗi lần mở) để quản trị biết
+let errSent = 0;
+function reportErr(m){ try { if (DEMO || !S.token || errSent >= 5) return; errSent++;
+  api('logError', { msg: String(m).slice(0, 400) + ' | ' + navigator.userAgent.slice(0, 120) }).catch(() => {}); } catch(e){} }
+addEventListener('error', e => reportErr((e.message || 'Lỗi') + ' @' + String(e.filename || '').split('/').pop() + ':' + (e.lineno || '')));
+addEventListener('unhandledrejection', e => reportErr('Promise: ' + (e.reason && e.reason.message || e.reason)));
 if (!DEMO && 'serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
 

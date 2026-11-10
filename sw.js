@@ -1,5 +1,5 @@
 // Lưu sẵn giao diện để mở được khi không có mạng. Dữ liệu gia phả do trang tự lưu.
-const CACHE = 'giapha-v2';
+const CACHE = 'giapha-v3';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener('activate', e => {
